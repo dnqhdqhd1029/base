@@ -1,5 +1,6 @@
 @charset "UTF-8";
-@import  url ("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css");
+
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
 html {
   scroll-behavior: smooth;
@@ -82,7 +83,7 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-family: "Noto Sans KR", sans-serif;
+  /* font-family: "Noto Sans KR", sans-serif; */
   letter-spacing: -0.05em;
   /*font-size: inherit;
   font-family: inherit;
