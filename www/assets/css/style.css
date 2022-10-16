@@ -139,6 +139,7 @@ img {
   align-items: center;
   height: 100%;
   font-size: 12px;
+  padding-left: 10px;
 }
 .main-header .lnb .nav-link.ic-menu {
   width: 30px;
@@ -173,6 +174,7 @@ body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav)
   /* margin-left: 274px !important; 
   margin-top: 46px !important;*/
   background-color: #2d323f;
+  padding-bottom: 20px;
 }
 
 .content-search {
@@ -227,6 +229,11 @@ body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav)
   margin-bottom: 20px;
 }
 
+/*cont-wrap*/
+.cont-wrap {
+  height: 100vh;
+}
+
 /*h2.title*/
 h2.title {
   font-size: 20px;
@@ -242,6 +249,7 @@ h2.title {
 /*tabel*/
 .table.dataTable {
   border-collapse: collapse !important;
+  width: 1600px;
 }
 
 .table thead {
@@ -249,6 +257,9 @@ h2.title {
   color: #fff;
   text-align: center;
   font-size: 12px;
+}
+.table.dataTable thead th {
+  text-align: center;
 }
 .table thead th {
   text-align: center;
