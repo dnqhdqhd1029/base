@@ -103,7 +103,7 @@ img {
   border: none;
   width: 100%;
   height: 38px;
-  /* background-color: #e5e7f1; */
+  background-color: #e5e7f1;
   font-size: 15px;
   color: #000;
   padding-left: 40px;
@@ -114,12 +114,20 @@ img {
   color: #000;
   font-weight: 800;
 }
+.login-box .login-input .input-cont input:focus {
+  border: 1px solid #7098e1;
+  border-radius: 0;
+}
+.login-box .login-input .input-cont input:-internal-autofill-selected {
+  border: 1px solid #7098e1;
+  background-color: #e5e7f1;
+}
 .login-box .login-input .input-cont.id-cont::before {
   content: "";
   width: 38px;
   height: 38px;
   background: url(../images/ic-id.png) center center no-repeat !important;
-  background-size: xontain;
+  background-size: contain;
   position: absolute;
   left: 5px;
   z-index: 100;
