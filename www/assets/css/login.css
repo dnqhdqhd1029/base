@@ -109,11 +109,11 @@ img {
   padding-left: 40px;
   background-color: #000 !important;
   position: relative;
-  font-weight: 600;
+  font-weight: 800;
 }
 .login-box .login-input .input-cont input::placeholder {
   color: #000;
-  font-weight: 600;
+  font-weight: 800;
 }
 .login-box .login-input .input-cont.id-cont::before {
   content: "";
@@ -153,7 +153,7 @@ img {
   border-radius: 3px;
   font-size: 17px;
   color: #000;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .btn-pw {
@@ -162,7 +162,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .btn-pw i {

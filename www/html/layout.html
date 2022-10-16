@@ -1,249 +1,781 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="viewport-fit=cover,width=device-width,height=device-height,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"
-    />
-    <!-- <link rel="shortcut icon" href="assets/images/favicon.ico" /> -->
-    <title>레이아웃</title>
-    <script src="../assets/js/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/docs/3.2/assets/plugins/fontawesome-free/css/all.min.css"
-    />
 
-    <link rel="stylesheet" href="../assets/css/style1.css" />
-    <!-- <script src="../assets/js/jquery-3.4.1.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport"
+    content="viewport-fit=cover,width=device-width,height=device-height,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+  <!-- <link rel="shortcut icon" href="assets/images/favicon.ico" /> -->
+  <title>레이아웃</title>
+  <script src="../assets/js/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+  <script type="text/javascript" language="javascript"
+    src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" language="javascript"
+    src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" />
+  <script type="text/javascript" class="init">
+    $(document).ready(function () {
+      $('#example').DataTable();
+    });
+  </script>
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <!-- <link rel="stylesheet" href="../assets/css/style-mobile.css" />
+  <script src="../assets/js/jquery-3.4.1.min.js"></script>
     <script src="../assets/js/common.js"></script> -->
-  </head>
-  <body>
-    <div class="wrapper">
-      <!-- Navbar -->
-      <nav class="main-header navbar navbar-expand">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button">
-          <i class="fas fa-bars">메뉴접기</i>
-        </a>
-      </nav>
-      <!-- /.navbar -->
-      <!-- Main Sidebar Container -->
-      <aside class="main-sidebar elevation-1">
-        <!-- Brand Logo -->
-        <a href="#none" class="brand-link">
-          <h1 class="logo">MES 시스템</h1>
-        </a>
+</head>
+<!--hold-transition sidebar-mini layout-fixed layout-navbar-fixed-->
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
-            <ul
-              class="nav nav-pills nav-sidebar flex-column"
-              data-widget="treeview"
-              role="menu"
-            >
-              <!-- <li class="nav-item  menu-is-opening">
+<body class="">
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand">
+      <div class="lnb">
+        <button class="nav-link ic-menu" data-widget="pushmenu" href="#" role="button"> </button>
+
+        <button class="ic-home"></button>
+        <div>생산관리 > 공정작업관리 > 공정별작업관리</div>
+      </div>
+  </div>
+  </nav>
+  <!-- /.navbar -->
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar elevation-2">
+    <!-- Brand Logo -->
+    <a href="#none" class="brand-link">
+      <h1 class="logo">LAKE MATERIALS <b>MES</b></h1>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+          <!-- <li class="nav-item  menu-is-opening">
                 <a href="#" class="nav-link">
                   <i class=""></i>
                   <p>기준정보 관리</p>
                 </a>
                 
               </li> -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                기준정보관리
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                판매관리
+
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link active">
+              <i></i>
+              <p>
+                생산관리
+
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    기준정보관리
-                  </p>
+                  <p>생산계획관리</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    판매관리
-                   
-                  </p>
+                  <p>공정작업관리</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i></i>
-                  <p>
-                    생산관리
-                   
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
+                <ul class="nav nav-treeview menu-is-opening menu-open">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <p>생산계획관리</p>
+                    <a href="#" class="nav-link active">
+                      <p>공정별작업관리</p>
                     </a>
                   </li>
-                  <li class="nav-item menu-open">
+                  <li class="nav-item">
                     <a href="#" class="nav-link">
-                      <p>공정작업관리</p>
+                      <p>자재/반제품불출관리</p>
                     </a>
-                    <ul class="nav nav-treeview menu-is-opening menu-open">
-                      <li class="nav-item">
-                        <a href="#" class="nav-link active">
-                          <p>공정별작업관리</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <p>자재/반제품불출관리</p>
-                        </a>
-                      </li>
-                    </ul>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    생산실적관리
-                   
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    자잭구매관리
-                   
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    출하관리
-                    
-                   
-                  </p>
-                </a>
-              </li>          
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    품질관리
-                    
-                   
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    재고관리
-                    
-                   
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    인사노무관리
-                    
-                   
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    CS관리
-                    
-                   
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    회계(제조원가)관리
-                    
-                   
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    자산관리
-                    
-                   
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i></i>
-                  <p>
-                    외상매출금관리
-                   
-                  </p>
-                </a>
-              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                생산실적관리
 
-          </nav>
-          <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
-      </aside>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                자잭구매관리
 
-      <div class="content-wrapper px-4 py-2">
-        <div class="content-header">
-          <h1>Expandable Table Plugin</h1>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                출하관리
+
+
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                품질관리
+
+
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                재고관리
+
+
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                인사노무관리
+
+
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                CS관리
+
+
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                회계(제조원가)관리
+
+
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                자산관리
+
+
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i></i>
+              <p>
+                외상매출금관리
+
+              </p>
+            </a>
+          </li>
+
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+
+
+  <div class="content-wrapper px-4 ">
+
+    <div class="content-search ">
+      <div class="row">
+        <div class="col-xxl-9 col-md-12 input-search">
+          <div class="row">
+            <div class="col">
+              <button>품목명 </button>
+            </div>
+            <div class="col">
+              <button> 품목코드</button>
+            </div>
+            <div class="col col-1">
+              <button>모델</button>
+            </div>
+            <div class="col">
+              <button>품목구분</button>
+            </div>
+            <div class="col col-3 flex-justify">
+              <button class="mr5">제품분류</button>
+              <button class="mr5">조회구분</button>
+              <button>전 체</button>
+            </div>
+            <div class="col col-1 ">
+              <button>사업장구분 </button>
+            </div>
+            <div class="col col-1">
+              <button></button>
+            </div>
+          </div>
         </div>
-        <table class="table">
+        <div class=" col-xxl-3 col-md-12 text-right">
+          <div class="search-btn">
+            <button class="btn mr10"><i class="ic-search"></i>조회</button>
+            <button class="btn mr10"><i class="ic-exle"></i>엑셀</button>
+            <button class="btn"><i class="ic-reset"></i>초기화</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="card cont-wrap  p-4">
+      <h2 class="title">공정별 작업 관리</h2>
+
+      <div class="table-responsive-xxl dataTables_wrapper dt-bootstrap4" id="dtBasicExample_wrapper">
+
+        <table id="example" class="table table-striped table-bordered table-sm" cellspacing="0" style="width: 100%;">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th class="th-sm">작업오더번호
+              </th>
+              <th class="th-sm">품목전호
+              </th>
+              <th class="th-sm">수주번호
+              </th>
+              <th class="th-sm">비고
+              </th>
+              <th class="th-sm">지시일
+              </th>
+              <th class="th-sm">기카규격
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+              <td>Tiger Nixon</td>
+              <td>System Architect</td>
+              <td>Edinburgh</td>
+              <td>61</td>
+              <td>2011/04/25</td>
+              <td>$320,800</td>
             </tr>
             <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
+              <td>Garrett Winters</td>
+              <td>Accountant</td>
+              <td>Tokyo</td>
+              <td>63</td>
+              <td>2011/07/25</td>
+              <td>$170,750</td>
             </tr>
             <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
+              <td>Ashton Cox</td>
+              <td>Junior Technical Author</td>
+              <td>San Francisco</td>
+              <td>66</td>
+              <td>2009/01/12</td>
+              <td>$86,000</td>
+            </tr>
+            <tr>
+              <td>Cedric Kelly</td>
+              <td>Senior Javascript Developer</td>
+              <td>Edinburgh</td>
+              <td>22</td>
+              <td>2012/03/29</td>
+              <td>$433,060</td>
+            </tr>
+            <tr>
+              <td>Airi Satou</td>
+              <td>Accountant</td>
+              <td>Tokyo</td>
+              <td>33</td>
+              <td>2008/11/28</td>
+              <td>$162,700</td>
+            </tr>
+            <tr>
+              <td>Brielle Williamson</td>
+              <td>Integration Specialist</td>
+              <td>New York</td>
+              <td>61</td>
+              <td>2012/12/02</td>
+              <td>$372,000</td>
+            </tr>
+            <tr>
+              <td>Herrod Chandler</td>
+              <td>Sales Assistant</td>
+              <td>San Francisco</td>
+              <td>59</td>
+              <td>2012/08/06</td>
+              <td>$137,500</td>
+            </tr>
+            <tr>
+              <td>Rhona Davidson</td>
+              <td>Integration Specialist</td>
+              <td>Tokyo</td>
+              <td>55</td>
+              <td>2010/10/14</td>
+              <td>$327,900</td>
+            </tr>
+            <tr>
+              <td>Colleen Hurst</td>
+              <td>Javascript Developer</td>
+              <td>San Francisco</td>
+              <td>39</td>
+              <td>2009/09/15</td>
+              <td>$205,500</td>
+            </tr>
+            <tr>
+              <td>Sonya Frost</td>
+              <td>Software Engineer</td>
+              <td>Edinburgh</td>
+              <td>23</td>
+              <td>2008/12/13</td>
+              <td>$103,600</td>
+            </tr>
+            <tr>
+              <td>Jena Gaines</td>
+              <td>Office Manager</td>
+              <td>London</td>
+              <td>30</td>
+              <td>2008/12/19</td>
+              <td>$90,560</td>
+            </tr>
+            <tr>
+              <td>Quinn Flynn</td>
+              <td>Support Lead</td>
+              <td>Edinburgh</td>
+              <td>22</td>
+              <td>2013/03/03</td>
+              <td>$342,000</td>
+            </tr>
+            <tr>
+              <td>Charde Marshall</td>
+              <td>Regional Director</td>
+              <td>San Francisco</td>
+              <td>36</td>
+              <td>2008/10/16</td>
+              <td>$470,600</td>
+            </tr>
+            <tr>
+              <td>Haley Kennedy</td>
+              <td>Senior Marketing Designer</td>
+              <td>London</td>
+              <td>43</td>
+              <td>2012/12/18</td>
+              <td>$313,500</td>
+            </tr>
+            <tr>
+              <td>Tatyana Fitzpatrick</td>
+              <td>Regional Director</td>
+              <td>London</td>
+              <td>19</td>
+              <td>2010/03/17</td>
+              <td>$385,750</td>
+            </tr>
+            <tr>
+              <td>Michael Silva</td>
+              <td>Marketing Designer</td>
+              <td>London</td>
+              <td>66</td>
+              <td>2012/11/27</td>
+              <td>$198,500</td>
+            </tr>
+            <tr>
+              <td>Paul Byrd</td>
+              <td>Chief Financial Officer (CFO)</td>
+              <td>New York</td>
+              <td>64</td>
+              <td>2010/06/09</td>
+              <td>$725,000</td>
+            </tr>
+            <tr>
+              <td>Gloria Little</td>
+              <td>Systems Administrator</td>
+              <td>New York</td>
+              <td>59</td>
+              <td>2009/04/10</td>
+              <td>$237,500</td>
+            </tr>
+            <tr>
+              <td>Bradley Greer</td>
+              <td>Software Engineer</td>
+              <td>London</td>
+              <td>41</td>
+              <td>2012/10/13</td>
+              <td>$132,000</td>
+            </tr>
+            <tr>
+              <td>Dai Rios</td>
+              <td>Personnel Lead</td>
+              <td>Edinburgh</td>
+              <td>35</td>
+              <td>2012/09/26</td>
+              <td>$217,500</td>
+            </tr>
+            <tr>
+              <td>Jenette Caldwell</td>
+              <td>Development Lead</td>
+              <td>New York</td>
+              <td>30</td>
+              <td>2011/09/03</td>
+              <td>$345,000</td>
+            </tr>
+            <tr>
+              <td>Yuri Berry</td>
+              <td>Chief Marketing Officer (CMO)</td>
+              <td>New York</td>
+              <td>40</td>
+              <td>2009/06/25</td>
+              <td>$675,000</td>
+            </tr>
+            <tr>
+              <td>Caesar Vance</td>
+              <td>Pre-Sales Support</td>
+              <td>New York</td>
+              <td>21</td>
+              <td>2011/12/12</td>
+              <td>$106,450</td>
+            </tr>
+            <tr>
+              <td>Doris Wilder</td>
+              <td>Sales Assistant</td>
+              <td>Sidney</td>
+              <td>23</td>
+              <td>2010/09/20</td>
+              <td>$85,600</td>
+            </tr>
+            <tr>
+              <td>Angelica Ramos</td>
+              <td>Chief Executive Officer (CEO)</td>
+              <td>London</td>
+              <td>47</td>
+              <td>2009/10/09</td>
+              <td>$1,200,000</td>
+            </tr>
+            <tr>
+              <td>Gavin Joyce</td>
+              <td>Developer</td>
+              <td>Edinburgh</td>
+              <td>42</td>
+              <td>2010/12/22</td>
+              <td>$92,575</td>
+            </tr>
+            <tr>
+              <td>Jennifer Chang</td>
+              <td>Regional Director</td>
+              <td>Singapore</td>
+              <td>28</td>
+              <td>2010/11/14</td>
+              <td>$357,650</td>
+            </tr>
+            <tr>
+              <td>Brenden Wagner</td>
+              <td>Software Engineer</td>
+              <td>San Francisco</td>
+              <td>28</td>
+              <td>2011/06/07</td>
+              <td>$206,850</td>
+            </tr>
+            <tr>
+              <td>Fiona Green</td>
+              <td>Chief Operating Officer (COO)</td>
+              <td>San Francisco</td>
+              <td>48</td>
+              <td>2010/03/11</td>
+              <td>$850,000</td>
+            </tr>
+            <tr>
+              <td>Shou Itou</td>
+              <td>Regional Marketing</td>
+              <td>Tokyo</td>
+              <td>20</td>
+              <td>2011/08/14</td>
+              <td>$163,000</td>
+            </tr>
+            <tr>
+              <td>Michelle House</td>
+              <td>Integration Specialist</td>
+              <td>Sidney</td>
+              <td>37</td>
+              <td>2011/06/02</td>
+              <td>$95,400</td>
+            </tr>
+            <tr>
+              <td>Suki Burks</td>
+              <td>Developer</td>
+              <td>London</td>
+              <td>53</td>
+              <td>2009/10/22</td>
+              <td>$114,500</td>
+            </tr>
+            <tr>
+              <td>Prescott Bartlett</td>
+              <td>Technical Author</td>
+              <td>London</td>
+              <td>27</td>
+              <td>2011/05/07</td>
+              <td>$145,000</td>
+            </tr>
+            <tr>
+              <td>Gavin Cortez</td>
+              <td>Team Leader</td>
+              <td>San Francisco</td>
+              <td>22</td>
+              <td>2008/10/26</td>
+              <td>$235,500</td>
+            </tr>
+            <tr>
+              <td>Martena Mccray</td>
+              <td>Post-Sales support</td>
+              <td>Edinburgh</td>
+              <td>46</td>
+              <td>2011/03/09</td>
+              <td>$324,050</td>
+            </tr>
+            <tr>
+              <td>Unity Butler</td>
+              <td>Marketing Designer</td>
+              <td>San Francisco</td>
+              <td>47</td>
+              <td>2009/12/09</td>
+              <td>$85,675</td>
+            </tr>
+            <tr>
+              <td>Howard Hatfield</td>
+              <td>Office Manager</td>
+              <td>San Francisco</td>
+              <td>51</td>
+              <td>2008/12/16</td>
+              <td>$164,500</td>
+            </tr>
+            <tr>
+              <td>Hope Fuentes</td>
+              <td>Secretary</td>
+              <td>San Francisco</td>
+              <td>41</td>
+              <td>2010/02/12</td>
+              <td>$109,850</td>
+            </tr>
+            <tr>
+              <td>Vivian Harrell</td>
+              <td>Financial Controller</td>
+              <td>San Francisco</td>
+              <td>62</td>
+              <td>2009/02/14</td>
+              <td>$452,500</td>
+            </tr>
+            <tr>
+              <td>Timothy Mooney</td>
+              <td>Office Manager</td>
+              <td>London</td>
+              <td>37</td>
+              <td>2008/12/11</td>
+              <td>$136,200</td>
+            </tr>
+            <tr>
+              <td>Jackson Bradshaw</td>
+              <td>Director</td>
+              <td>New York</td>
+              <td>65</td>
+              <td>2008/09/26</td>
+              <td>$645,750</td>
+            </tr>
+            <tr>
+              <td>Olivia Liang</td>
+              <td>Support Engineer</td>
+              <td>Singapore</td>
+              <td>64</td>
+              <td>2011/02/03</td>
+              <td>$234,500</td>
+            </tr>
+            <tr>
+              <td>Bruno Nash</td>
+              <td>Software Engineer</td>
+              <td>London</td>
+              <td>38</td>
+              <td>2011/05/03</td>
+              <td>$163,500</td>
+            </tr>
+            <tr>
+              <td>Sakura Yamamoto</td>
+              <td>Support Engineer</td>
+              <td>Tokyo</td>
+              <td>37</td>
+              <td>2009/08/19</td>
+              <td>$139,575</td>
+            </tr>
+            <tr>
+              <td>Thor Walton</td>
+              <td>Developer</td>
+              <td>New York</td>
+              <td>61</td>
+              <td>2013/08/11</td>
+              <td>$98,540</td>
+            </tr>
+            <tr>
+              <td>Finn Camacho</td>
+              <td>Support Engineer</td>
+              <td>San Francisco</td>
+              <td>47</td>
+              <td>2009/07/07</td>
+              <td>$87,500</td>
+            </tr>
+            <tr>
+              <td>Serge Baldwin</td>
+              <td>Data Coordinator</td>
+              <td>Singapore</td>
+              <td>64</td>
+              <td>2012/04/09</td>
+              <td>$138,575</td>
+            </tr>
+            <tr>
+              <td>Zenaida Frank</td>
+              <td>Software Engineer</td>
+              <td>New York</td>
+              <td>63</td>
+              <td>2010/01/04</td>
+              <td>$125,250</td>
+            </tr>
+            <tr>
+              <td>Zorita Serrano</td>
+              <td>Software Engineer</td>
+              <td>San Francisco</td>
+              <td>56</td>
+              <td>2012/06/01</td>
+              <td>$115,000</td>
+            </tr>
+            <tr>
+              <td>Jennifer Acosta</td>
+              <td>Junior Javascript Developer</td>
+              <td>Edinburgh</td>
+              <td>43</td>
+              <td>2013/02/01</td>
+              <td>$75,650</td>
+            </tr>
+            <tr>
+              <td>Cara Stevens</td>
+              <td>Sales Assistant</td>
+              <td>New York</td>
+              <td>46</td>
+              <td>2011/12/06</td>
+              <td>$145,600</td>
+            </tr>
+            <tr>
+              <td>Hermione Butler</td>
+              <td>Regional Director</td>
+              <td>London</td>
+              <td>47</td>
+              <td>2011/03/21</td>
+              <td>$356,250</td>
+            </tr>
+            <tr>
+              <td>Lael Greer</td>
+              <td>Systems Administrator</td>
+              <td>London</td>
+              <td>21</td>
+              <td>2009/02/27</td>
+              <td>$103,500</td>
+            </tr>
+            <tr>
+              <td>Jonas Alexander</td>
+              <td>Developer</td>
+              <td>San Francisco</td>
+              <td>30</td>
+              <td>2010/07/14</td>
+              <td>$86,500</td>
+            </tr>
+            <tr>
+              <td>Shad Decker</td>
+              <td>Regional Director</td>
+              <td>Edinburgh</td>
+              <td>51</td>
+              <td>2008/11/13</td>
+              <td>$183,000</td>
+            </tr>
+            <tr>
+              <td>Michael Bruce</td>
+              <td>Javascript Developer</td>
+              <td>Singapore</td>
+              <td>29</td>
+              <td>2011/06/27</td>
+              <td>$183,000</td>
+            </tr>
+            <tr>
+              <td>Donna Snider</td>
+              <td>Customer Support</td>
+              <td>New York</td>
+              <td>27</td>
+              <td>2011/01/25</td>
+              <td>$112,000</td>
             </tr>
           </tbody>
+          <tfoot>
+            <tr>
+              <th>Name
+              </th>
+              <th>Position
+              </th>
+              <th>Office
+              </th>
+              <th>Age
+              </th>
+              <th>Start date
+              </th>
+              <th>Salary
+              </th>
+            </tr>
+          </tfoot>
         </table>
+
+
+
       </div>
+      <!--//responsive-->
+
+
+
     </div>
-  </body>
+    <!--//card-->
+
+
+
+  </div>
+  </div>
+</body>
+
 </html>
