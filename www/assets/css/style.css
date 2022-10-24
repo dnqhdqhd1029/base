@@ -25,6 +25,19 @@ img {
   object-fit: cover;
 }
 
+
+.container {
+  width: 1900px;
+  max-width: none !important;
+  /* border: 1px solid red; */
+  --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+    padding-right:0;
+    padding-left: 0;
+}
+
+
+
 /*wrapper*/
 .wrapper {
 }
@@ -249,7 +262,7 @@ h2.title {
 /*tabel*/
 .table.dataTable {
   border-collapse: collapse !important;
-  width: 1600px;
+  width: 100%;
 }
 
 .table thead {
