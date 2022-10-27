@@ -1,79 +1,80 @@
-
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회사사이트2</title>
 
-  <title>회사사이트2</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="../company/css/company.css" />
+    <script src="../company/js/jquery-3.4.1.min.js"></script>
+  </head>
 
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"  />
-  <link rel="stylesheet" href="../company/css/company.css" />
-  <script src="../company/js/jquery-3.4.1.min.js"></script>
-</head>
-
-
-<body>
-  <header id="header">
-    <div class="wrap">
-      <h1 class="logo">FIT on Mining</h1>
-      <nav id="gnb">
-        <a href="#none">서비스 소개</a>
-        <a href="#none">서비스플랜</a>
-        <a href="#none">서비스가입</a>
-        <a href="#none">파트너</a>
-        <a href="#none">고객센터</a>
-      </nav>
-
-      <div class="lnb">
-        <button>로그인 </button>
-        <button>회원가입</button>
-      </div>
-    </div>
-
-    <div class="snb">
+  <body>
+    <header id="header">
       <div class="wrap">
-        <button class="home">홈</button>
-        <a href="#none" class="on">서비스 소개</a>
-        <a href="#none">서비스플랜</a>
-        <a href="#none">서비스가입</a>
-        <a href="#none">파트너</a>
-        <a href="#none">고객센터</a>
+        <h1 class="logo text-hide">FIT on Mining</h1>
+        <nav id="gnb">
+          <a href="#none">서비스 소개</a>
+          <a href="#none">서비스플랜</a>
+          <a href="#none">서비스가입</a>
+          <a href="#none">파트너</a>
+          <a href="#none">고객센터</a>
+        </nav>
+
+        <div class="lnb">
+          <button>로그인</button>
+          <button>회원가입</button>
+        </div>
       </div>
-    </div>
 
-  </header>
-  <div class="main-visual">
-    <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">Slide 1</div>
-
+      <div class="gnb-menu">
+        <div class="wrap">
+          <div>
+            <button class="home">홈</button>
+          </div>
+          <div class="menu">
+            <a href="#none" class="on">서비스 소개</a>
+            <a href="#none">서비스플랜</a>
+            <a href="#none">서비스가입</a>
+            <a href="#none">파트너</a>
+            <a href="#none">고객센터</a>
+          </div>
+        </div>
       </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-pagination"></div>
+    </header>
+    <div class="main-visual">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">Slide 1</div>
+          <div class="swiper-slide">Slide 1</div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+      <!-- Swiper JS -->
+      <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+      <!-- Initialize Swiper -->
+      <script>
+        var swiper = new Swiper(".mySwiper", {
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+            //type: "fraction",
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev"
+          }
+        });
+      </script>
     </div>
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Initialize Swiper -->
-    <script>
-      var swiper = new Swiper(".mySwiper", {
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-          //type: "fraction",
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
-    </script>
-  </div>
-</body>
-
+  </body>
 </html>

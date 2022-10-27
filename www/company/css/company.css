@@ -20,7 +20,7 @@ body {
   font-family: "NanumSquare", sans-serif;
 }
 
-body{
+body {
   /*border: 1px solid red;*/
 }
 
@@ -28,6 +28,84 @@ img {
   max-width: 100%;
   object-fit: cover;
 }
+.wrap {
+  margin: 0 auto;
+  width: 1180px;
+  border: 1px solid red;
+}
+header .wrap {
+  position: relative;
+  padding: 26px 0 26px 0;
+  border: 1px solid red;
+  overflow: hidden;
+}
 
+header .wrap h1 {
+  width: 185px;
+  height: 37px;
+  background: url(../images/h1-logo.png) center center no-repeat;
+  background-size: 100%;
+  margin-right: 139px;
+  float: left;
+}
+header .wrap nav {
+  float: left;
+  border: 1px solid red;
+}
+header .wrap nav {
+  font-size: 18px;
+  color: #000;
+}
+header .wrap nav a {
+  margin-right: 30px;
+  font-weight: 800;
+}
 
+header .wrap .lnb {
+  float: right;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+}
+header .wrap .lnb button {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-left: 30px;
+  font-weight: 800;
+}
 
+.gnb-menu {
+  clear: both;
+  height: 60px;
+  background-color: #000;
+  color: #9b9b9b;
+}
+.gnb-menu .wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+.gnb-menu .wrap div {
+  border: 1px solid red;
+}
+.gnb-menu .wrap div .home {
+  width: 30px;
+  height: 30px;
+  background: url(../images/ic-home.png) center center no-repeat;
+  background-size: contain;
+}
+.gnb-menu .wrap .menu a {
+  color: #9b9b9b;
+  font-size: 18px;
+  width: 220px;
+  text-align: center;
+  display: inline-block;
+}
+.gnb-menu .wrap .menu a.on {
+  color: #fff;
+}
+
+/*main-visual*/
+.main-visual {
+  height: 600px;
+}
