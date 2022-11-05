@@ -393,7 +393,7 @@ a[x-apple-data-detectors] {
   color: #eb7305;
 }
 .text-red {
-  color: #d40000;
+  color: #ff0600;
 }
 .text-ygreen {
   color: #a6cd64;
@@ -753,6 +753,10 @@ a[x-apple-data-detectors] {
   display: flex;
   justify-content: end;
   align-items: center;
+}
+
+.flex {
+  flex: 1;
 }
 
 .align-start {
