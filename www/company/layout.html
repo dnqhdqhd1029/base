@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>회사사이트2</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="../company/css/company.css" />
+  <script src="../company/js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <div w3-include-html="header.html"></div>
+  <div class="main-visual">
+    <div class="swiper mySwiper wrap">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="./images/img-visual01.png" alt="" /></div>
+        <div class="swiper-slide"><img src="./images/img-visual02.png" alt="" /></div>
+        <div class="swiper-slide"><img src="./images/img-visual03.png" alt="" /></div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+          //type: "fraction",
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      });
+    </script>
+
+
+
+
+  </div>
+  <div w3-include-html="footer.html"></div>
+  <script>
+    function includeHTML() {
+      var z, i, elmnt, file, xhttp;
+      /* Loop through a collection of all HTML elements: */
+      z = document.getElementsByTagName("*");
+      for (i = 0; i < z.length; i++) {
+        elmnt = z[i];
+        /*search for elements with a certain atrribute:*/
+        file = elmnt.getAttribute("w3-include-html");
+        if (file) {
+          /* Make an HTTP request using the attribute value as the file name: */
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+              if (this.status == 200) {
+                elmnt.innerHTML = this.responseText;
+              }
+              if (this.status == 404) {
+                elmnt.innerHTML = "Page not found.";
+              }
+              /* Remove the attribute, and call this function once more: */
+              elmnt.removeAttribute("w3-include-html");
+              includeHTML();
+            }
+          }
+          xhttp.open("GET", file, true);
+          xhttp.send();
+          /* Exit the function: */
+          return;
+        }
+      }
+    }
+
+    includeHTML();
+  </script>
+</body>
+
+</html>

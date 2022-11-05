@@ -1,20 +1,47 @@
 @charset "UTF-8";
 
-@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+@import url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css");
+
+:root {
+  --swiper-theme-color: #fff;
+}
 
 html {
   scroll-behavior: smooth;
 }
 /* reset style */
-article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
   display: block;
 }
-audio,canvas,progress,video,span,em,b,strong,a,
+audio,
+canvas,
+progress,
+video,
+span,
+em,
+b,
+strong,
+a,
 label {
   display: inline-block;
   box-sizing: border-box;
 }
-html,body,div,p,h1,
+html,
+body,
+div,
+p,
+h1,
 h2,
 h3,
 h4,

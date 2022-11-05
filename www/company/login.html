@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>로그인</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="../company/css/company.css" />
+  <script src="../company/js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <header id="header">
+    <div class="wrap">
+      <h1 class="logo text-hide">FIT on Mining</h1>
+      <nav id="gnb">
+        <a href="#none">서비스 소개</a>
+        <a href="#none">서비스플랜</a>
+        <a href="#none">서비스가입</a>
+        <a href="#none">파트너</a>
+        <a href="#none">고객센터</a>
+      </nav>
+
+      <div class="lnb">
+        <button>로그인</button>
+        <button>회원가입</button>
+      </div>
+    </div>
+
+    <div class="gnb-menu">
+      <div class="wrap">
+        <div>
+          <button class="home">홈</button>
+        </div>
+        <div class="menu">
+          <a href="#none" class="on">로그인</a>
+          <a href="#none">일반 회원</a>
+          <a href="#none">플랜 사용자</a>
+          <a href="#none"> 플랜 관리자 </a>
+          <a href="#none"> 포털 관리자</a>
+        </div>
+      </div>
+    </div>
+
+  </header>
+  <div class="login-wrap">
+
+    <div class="login-box">
+      <h2>로그인</h2>
+      <div class="input-cont  border-none">
+        <input type="text" placeholder="아이디" />
+      </div>
+      <div class="input-cont">
+        <input type="password" placeholder="비밀번호" />
+      </div>
+
+      <div class="btn-cont">
+        <button class="btn btn-pull bg-blue">로그인</button>
+      </div>
+      <div class="tc">
+        <button>회원가입</button>
+        <button>아이디찾기</button>
+        <button>비밀번호찾기</button>
+      </div>
+    </div>
+
+
+  </div>
+  <div w3-include-html="footer.html"></div>
+  <script>
+    function includeHTML() {
+      var z, i, elmnt, file, xhttp;
+      /* Loop through a collection of all HTML elements: */
+      z = document.getElementsByTagName("*");
+      for (i = 0; i < z.length; i++) {
+        elmnt = z[i];
+        /*search for elements with a certain atrribute:*/
+        file = elmnt.getAttribute("w3-include-html");
+        if (file) {
+          /* Make an HTTP request using the attribute value as the file name: */
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+              if (this.status == 200) {
+                elmnt.innerHTML = this.responseText;
+              }
+              if (this.status == 404) {
+                elmnt.innerHTML = "Page not found.";
+              }
+              /* Remove the attribute, and call this function once more: */
+              elmnt.removeAttribute("w3-include-html");
+              includeHTML();
+            }
+          }
+          xhttp.open("GET", file, true);
+          xhttp.send();
+          /* Exit the function: */
+          return;
+        }
+      }
+    }
+
+    includeHTML();
+  </script>
+</body>
+
+</html>
