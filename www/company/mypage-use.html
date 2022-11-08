@@ -36,74 +36,60 @@
         <button class="home">홈</button>
       </div>
       <div class="menu">
-        <a href="service-join.html">서비스 가입</a>
-        <a href="service-join.html"  class="on">서비스 가입신청</a>
-        <a href="service-change.html">서비스 변경신청</a>
-        <a href="service-approval.html">서비스 승인현황</a>
+        <a href="mypage-use.html">마이페이지</a>
+        <a href="mypage-use.html" class="on">서비스 이용현황</a>
+        <a href="mypage-file.html">서비스 청구현황</a>
+        <a href="mypage-payment.html">서비스 결제현황 </a>
+        <a href="mypage-info.html"> 회원정보 변경</a>
+        <a href="mypage-password.html"> 비밀번호 변경</a>
       </div>
     </div>
   </div>
 
 <div class="container">
   <div class="mypage-wrap">
-    <h2 class="title">서비스 신청</h2>
+    <h2 class="title">서비스 이용 현황</h2>
+
     <div class="mypage-box">
-      <div class="mypage-service">
-        플랜을 선택 후 사용자 수 , 스토리지 용량을 설정하여 서비스 신청하세요.
+      <div class="mypage-state">
+        홍길동님은 현재 <b>Full 서비스 요금제 + 25user</b> 를 사용중이십니다.
       </div>
-      <div class="input-cont">
+      <div class="flex-justify">
+        <b>실시간 사용량</b>
+        <button class="btn btn-line-gray"> 요금제 보기</button>
+
+      </div>
+      <div class="mypage-grap">
         <ul>
+            <li>
+              <div class="grap"><span style="width: 20%;"></span></div>
+              <em>20개/25개</em>
+            </li>
           <li>
-            <label>플랜선택</label>
-            <select>
-              <option>플랜선택요금제 블라블라</option>
-              <option>플랜선택요금제 블라블라</option>
-              <option>플랜선택요금제 블라블라</option>
-              <option>플랜선택요금제 블라블라</option>
-            </select>
+            <div class="grap"><span style="width:80%;"></span></div>
+            <em>25GB/30GB</em>
           </li>
           <li>
-            <label>플랜 기본 요금</label>
-            <input type="text" value="" />
-          </li>
-          <li>
-            <label>적용 사업자 수</label>
-            <input type="text" value="" />
-          </li>
-          <li>
-            <label>적용 업무 수</label>
-            <input type="text" value="" />
-          </li>
-          <li>
-            <label>최종 user수</label>
-            <input type="text" value="" />
-          </li>
-          <li>
-            <label>기본 스토리지</label>
-            <input type="text" value="" />
-          </li>
-          <li>
-            <label>추가 스토리지</label>
-            <input type="text" value="" />
-          </li>
-          <li>
-            <label>업무구</label>
-            <input type="text" value="" />
-          </li>
+          <div class="grap">
+            <span style="width: 40%;"></span>
+          </div>
+          <em>20user/25user</em>
+        </li>
 
         </ul>
-        <div class="total">
-          <label>총 결제금액</label>
-          <input type="text" /> 원
-        </div>
+
+      </div>
+
+      <div class="total">
+        <b>이번달 이용요금</b> <span class="input"></span>원
       </div>
 
       <div class="btn-cont">
-        <button class="btn btn-line-blue">다시입력</button>
-        <button class="btn btn-line-blue">서비스 신청</button>
+        <button class="btn btn-line-blue">변경하기</button>
+        <button class="btn btn-line-blue">확인</button>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
 <div w3-include-html="footer.html"></div>
