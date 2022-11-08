@@ -47,6 +47,11 @@ header .wrap h1 {
   margin-right: 139px;
   float: left;
 }
+header .wrap h1 button{
+  display: block;
+  width: 185px;
+  height: 37px;
+}
 header .wrap nav {
   float: left;
 }
@@ -157,6 +162,11 @@ footer .wrap .logo {
 footer button {
   color: #b1b1b1;
 }
+/*container*/
+.container{
+  min-height: 900px;
+}
+
 
 /*main-visual*/
 .main-visual {
