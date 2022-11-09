@@ -784,3 +784,35 @@ input::-webkit-search-results-button,
 input::-webkit-search-results-decoration {
   display: none;
 }
+
+
+/*btn*/
+.btn{
+  padding: 0 10px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 600;
+  min-width: 84px;
+}
+.btn-sm{
+  min-width: 84px;
+  height: 40px;
+  font-size: 15px;
+}
+.btn-round{
+  border-radius: 5px;
+}
+.btn.btn-pull{
+  width: 100%;
+}
+.btn-line-gray {
+  border-radius: 5px;
+  border: 1px solid #333333;
+  color: #333;
+}
+.btn.bg-blue {
+  background-color: #23ade4;
+  color: #fff;
+}
