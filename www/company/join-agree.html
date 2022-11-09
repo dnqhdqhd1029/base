@@ -1,69 +1,76 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
 
-  <title>회원가입</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="../company/css/style.css" />
+    <script src="../company/js/jquery-3.4.1.min.js"></script>
+  </head>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="../company/css/style.css" />
-  <script src="../company/js/jquery-3.4.1.min.js"></script>
-</head>
+  <body>
+    <div class="join-wrap">
+      <h1 class="logo"><img src="./images/h1-logo.png" alt="" /></h1>
+      <div class="join-box">
+        <h2>회원가입</h2>
+        <div class="step">
+          <ul>
+            <li class="step01 on"><span>이용약관동의</span></li>
+            <li class="step02"><span>정보입력</span></li>
+            <li class="step03"><span>가입완료</span></li>
+          </ul>
+        </div>
 
-<body>
-
-  <div class="join-wrap">
-    <h1 class="logo"><img src="./images/h1-logo.png" alt="" /></h1>
-    <div class="join-box">
-      <h2>회원가입</h2>
-      <div class="step">
-        <ul>
-          <li class="step01 on">이용약관동의 </li>
-          <li class="step02">정보입력</li>
-          <li class="step03">가입완료</li>
-        </ul>
+        <div class="agree-list">
+          <ul>
+            <li>
+              <input type="checkbox" id="agree01" />
+              <label for="agree01"
+                >홈페이지 이용약관 동의
+                <span class="text-red">(필수)</span></label
+              >
+              <button class="btn btn-line-gray">상세보기</button>
+            </li>
+            <li>
+              <input type="checkbox" id="agree02" />
+              <label for="agree02"
+                >개인정보 수집 및 이용 동의<span class="text-red"
+                  >(필수)</span
+                ></label
+              >
+              <button class="btn btn-line-gray">상세보기</button>
+            </li>
+            <li>
+              <input type="checkbox" id="agree03" />
+              <label for="agree03"
+                >만 14세 이상입니다 <span class="text-red">(필수)</span></label
+              >
+            </li>
+            <li>
+              <input type="checkbox" id="agree04" />
+              <label for="agree04"
+                >프로모션 정보 수신 동의
+                <span class="text-red">(선택)</span></label
+              >
+            </li>
+            <li>
+              <input type="checkbox" id="agree05" />
+              <label for="agree05">홈페이지 전체약관 동의 </label>
+            </li>
+          </ul>
+        </div>
+        <div class="btn-cont">
+          <button class="btn btn-pull bg-blue">동 의</button>
+          <!-- <button disabled class="btn btn-pull bg-blue">동의</button> -->
+        </div>
       </div>
-
-      <div class="agree-list">
-        <ul>
-          <li>
-            <input type="checkbox" id="agree01" />
-            <label for="agree01">홈페이지 이용약관 동의 <span class="text-red">(필수)</span></label>
-            <button class=" btn btn-line-gray">상세보기</button>
-          </li>
-          <li>
-            <input type="checkbox" id="agree02" />
-            <label for="agree02">개인정보 수집 및 이용 동의<span class="text-red">(필수)</span></label>
-            <button class=" btn btn-line-gray">상세보기</button>
-          </li>
-          <li>
-            <input type="checkbox" id="agree03" />
-            <label for="agree03">만 14세 이상입니다 <span class="text-red">(필수)</span></label>
-          </li>
-          <li>
-            <input type="checkbox" id="agree04" />
-            <label for="agree04">프로모션 정보 수신 동의 <span class="text-red">(선택)</span></label>
-          </li>
-          <li>
-            <input type="checkbox" id="agree05" />
-            <label for="agree05">홈페이지 전체약관 동의 </label>
-          </li>
-        </ul>
-
-      </div>
-      <div class="btn-cont">
-        <button class="btn btn-pull bg-blue">동 의</button>
-        <!-- <button disabled class="btn btn-pull bg-blue">동의</button> -->
-      </div>
-
     </div>
-
-
-  </div>
-
-</body>
-
+  </body>
 </html>

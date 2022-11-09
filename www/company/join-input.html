@@ -1,147 +1,129 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
 
-  <title>회원가입</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="../company/css/style.css" />
+    <script src="../company/js/jquery-3.4.1.min.js"></script>
+  </head>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="../company/css/style.css" />
-  <script src="../company/js/jquery-3.4.1.min.js"></script>
-</head>
+  <body>
+    <div class="join-wrap">
+      <h1 class="logo"><img src="./images/h1-logo.png" alt="" /></h1>
+      <div class="join-box">
+        <h2>회원가입</h2>
+        <div class="step">
+          <ul>
+            <li class="step01 check borderOn"><span>이용약관동의</span></li>
+            <li class="step02 on borderOn borderOf"><span>정보입력</span></li>
+            <li class="step03"><span>가입완료</span></li>
+          </ul>
+        </div>
 
-<body>
+        <div class="join-input">
+          <div class="flex-justify">
+            <label>이메일</label>
+            <div class="input-cont flex flex-justify">
+              <input type="text" />
+              <button class="btn btn-line-gray">중복확인</button>
+            </div>
+          </div>
+          <div class="flex-justify">
+            <label>비밀번호</label>
+            <div class="input-cont flex">
+              <input type="password" placeholder="8~15자" />
+            </div>
+          </div>
+          <div class="flex-justify">
+            <label>비밀번호 확인</label>
+            <div class="input-cont flex">
+              <input type="password" />
+            </div>
+          </div>
+          <div class="flex-justify">
+            <label>담당자 이름</label>
+            <div class="input-cont flex">
+              <input type="text" />
+            </div>
+          </div>
+          <div class="flex-justify">
+            <label> 휴대폰 번호</label>
+            <div class="input-cont flex">
+              <input type="tel" />
+            </div>
+          </div>
+          <div class="flex-justify">
+            <label>기업명</label>
+            <div class="input-cont flex">
+              <input type="text" />
+            </div>
+          </div>
+          <div class="flex-justify">
+            <label>사업자등록번호 </label>
+            <div class="input-cont flex">
+              <input type="text" />
+            </div>
+          </div>
+          <div class="flex-justify">
+            <label>대표자명</label>
+            <div class="input-cont flex">
+              <input type="text" />
+            </div>
+          </div>
+          <div class="flex-justify">
+            <label>업태</label>
+            <div class="input-cont flex">
+              <input type="text" />
+            </div>
+          </div>
+          <div class="flex-justify">
+            <label>종목</label>
+            <div class="input-cont flex">
+              <input type="text" />
+            </div>
+          </div>
+          <div class="flex-justify">
+            <label>사업장 주소</label>
+            <div class="input-cont flex">
+              <input type="text" />
+              <button class="btn btn-line-gray">주소검색</button>
+            </div>
+          </div>
+          <div class="flex-justify">
+            <label></label>
+            <div class="input-cont flex">
+              <input type="text" placeholder="상세주소" />
+            </div>
+          </div>
 
-  <div class="join-wrap">
-    <h1 class="logo"><img src="./images/h1-logo.png" alt="" /></h1>
-    <div class="join-box">
-      <h2>회원가입</h2>
-      <div class="step">
-        <ul>
-          <li class="step01 check">이용약관동의 </li>
-          <li class="step02 on">정보입력</li>
-          <li class="step03">가입완료</li>
-        </ul>
+          <div class="flex-justify">
+            <label>전화</label>
+            <div class="input-cont flex">
+              <input type="tel" />
+            </div>
+          </div>
+
+          <div class="flex-justify">
+            <label>사업자등록증</label>
+            <div class="input-cont flex">
+              <button class="btn btn-line-gray">파일선택</button>
+              <input type="text" />
+            </div>
+          </div>
+        </div>
+        <div class="btn-cont">
+          <button class="btn bg-gray">취 소</button>
+          <button class="btn bg-blue">신 청</button>
+        </div>
       </div>
-
-      <div class="join-input">
-
-        <div class="flex-justify">
-          <label>이메일</label>
-          <div class="input-cont flex flex-justify">
-            <input type="text" />
-            <button class="btn btn-line-gray">중복확인</button>
-          </div>
-        </div>
-        <div class="flex-justify">
-          <label>비밀번호</label>
-          <div class="input-cont flex">
-            <input type="password" placeholder="8~15자" />
-
-          </div>
-        </div>
-        <div class="flex-justify">
-          <label>비밀번호 확인</label>
-          <div class="input-cont flex">
-            <input type="password" />
-
-          </div>
-        </div>
-        <div class="flex-justify">
-          <label>담당자 이름</label>
-          <div class="input-cont flex">
-            <input type="text" />
-
-          </div>
-        </div>
-        <div class="flex-justify">
-          <label> 휴대폰 번호</label>
-          <div class="input-cont flex">
-            <input type="tel" />
-
-          </div>
-        </div>
-        <div class="flex-justify">
-          <label>기업명</label>
-          <div class="input-cont flex">
-            <input type="text" />
-
-          </div>
-        </div>
-        <div class="flex-justify">
-          <label>사업자등록번호 </label>
-          <div class="input-cont flex">
-            <input type="text" />
-
-          </div>
-        </div>
-        <div class="flex-justify">
-          <label>대표자명</label>
-          <div class="input-cont flex">
-            <input type="text" />
-
-          </div>
-        </div>
-        <div class="flex-justify">
-          <label>업태/종목</label>
-          <div class="input-cont flex">
-            <input type="text" />
-
-          </div>
-        </div>
-        <div class="flex-justify">
-          <label>사업장 주소</label>
-          <div class="input-cont flex">
-            <input type="text" />
-            <button class="btn btn-line-gray">중복확인</button>
-
-          </div>
-
-        </div>
-        <div class="flex-justify">
-          <label></label>
-          <div class="input-cont flex">
-            <input type="text" placeholder="상세주소" />
-          </div>
-        </div>
-
-        <div class="flex-justify">
-          <label>전화</label>
-          <div class="input-cont flex">
-            <input type="tel" />
-
-          </div>
-        </div>
-
-        <div class="flex-justify">
-          <label>사업자등록증</label>
-          <div class="input-cont flex">
-            <button class="btn btn-line-gray">파일선택</button>
-            <input type="text" />
-          </div>
-        </div>
-
-
-
-
-
-
-      </div>
-      <div class="btn-cont">
-        <button class="btn bg-gray">취 소</button>
-        <button class="btn bg-blue">신 청</button>
-
-
-      </div>
-
     </div>
-
-
-  </div>
-
-</body>
-
+  </body>
 </html>

@@ -47,7 +47,7 @@ header .wrap h1 {
   margin-right: 139px;
   float: left;
 }
-header .wrap h1 button{
+header .wrap h1 button {
   display: block;
   width: 185px;
   height: 37px;
@@ -119,13 +119,12 @@ header .wrap .lnb button {
 }
 .gnb-menu .wrap .menu a.on {
   color: #fff;
-
 }
 
 .gnb-menu .wrap .menu a:hover {
   color: #fff;
 }
-.gnb-menu .wrap .menu a:first-child{
+.gnb-menu .wrap .menu a:first-child {
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
   color: #fff;
@@ -136,7 +135,6 @@ header .wrap .lnb button {
   height: 25px;
   background: url(../images/ic-arrow-right01.png) center center no-repeat;
   margin-left: 10px;
-
 }
 
 /*footer*/
@@ -163,17 +161,16 @@ footer button {
   color: #b1b1b1;
 }
 /*container*/
-.container{
+.container {
   min-height: 900px;
 }
 
-
 /*main-visual*/
 .main-visual {
-  height: 612px;
-
+  height: 712px;
   background: url(../images/bg-main.png) center center no-repeat;
   background-size: cover;
+  padding-top: 50px;
 }
 .swiper-button-prev,
 .swiper-rtl .swiper-button-next {
@@ -401,6 +398,22 @@ footer button {
   margin-left: -13px;
 }
 
+.join-wrap .join-box .step ul li.borderOn {
+  border-color: #df2d29;
+}
+
+.join-wrap .join-box .step ul li.step02.borderOf::after {
+  content: "";
+  display: inline-block;
+  /* border-top: 3px solid #b2b2b2; */
+  width: 79px;
+  height: 3px;
+  background-color: #b2b2b2;
+  position: absolute;
+  left: 94px;
+  top: -3px;
+}
+
 .join-wrap .join-box .step ul li.step03 {
   text-align: right;
 }
@@ -488,6 +501,7 @@ footer button {
 .join-input {
   clear: both;
   text-align: left;
+  margin-bottom: 30px;
 }
 
 .join-input label {
@@ -592,20 +606,20 @@ h2.title {
   margin-bottom: 50px;
 }
 
-.mypage-state{
+.mypage-state {
   background-color: #23ade4;
-  padding:10px;
+  padding: 10px;
   font-size: 18px;
   color: #fff;
   margin-bottom: 30px;
 }
-.mypage-state b{
+.mypage-state b {
   color: #333;
   font-weight: 800;
   padding: 0 20px;
 }
 
-.mypage-grap{
+.mypage-grap {
   border-left: 2px solid #23ade4;
   width: 70%;
   margin: 0 auto;
@@ -613,34 +627,37 @@ h2.title {
   margin-top: 30px;
 }
 
-.mypage-grap ul li{
-  display:flex ;
+.mypage-grap ul li {
+  display: flex;
   justify-content: start;
   align-items: center;
   margin-bottom: 20px;
 }
-.mypage-grap ul li:last-child{
+.mypage-grap ul li:last-child {
   margin-bottom: 0;
 }
-.mypage-grap ul li .grap{
+.mypage-grap ul li .grap {
   width: 70%;
   height: 34px;
   border: 1px solid #23ade4;
   position: relative;
   margin-right: 20px;
-
 }
-.mypage-grap ul li .grap span{
+.mypage-grap ul li .grap span {
   display: block;
   position: absolute;
   left: 0;
   top: 0;
   height: 100%;
-  background: rgb(35,173,228);
-  background: linear-gradient(0deg, rgba(35,173,228,1) 19%, rgba(70,189,237,1) 52%, rgba(35,173,228,1) 80%);
-
+  background: rgb(35, 173, 228);
+  background: linear-gradient(
+    0deg,
+    rgba(35, 173, 228, 1) 19%,
+    rgba(70, 189, 237, 1) 52%,
+    rgba(35, 173, 228, 1) 80%
+  );
 }
-.mypage-grap ul li .grap  b{
+.mypage-grap ul li .grap b {
   position: absolute;
   left: 15px;
   top: 5px;
@@ -649,44 +666,42 @@ h2.title {
   font-weight: 700;
 }
 
-.mypage-box .total{
-
-  margin-top:30px;
+.mypage-box .total {
+  margin-top: 30px;
   margin-bottom: 30px;
   text-align: left;
 }
-.mypage-box .btn-sm{
+.mypage-box .btn-sm {
   height: 34px;
 }
 
-.mypage-box .total input{
+.mypage-box .total input {
   border: none;
   height: 40px;
   border-bottom: 1px solid #e5e5e5;
   width: 40%;
 }
 
-.mypage-box .btn-cont{
+.mypage-box .btn-cont {
   width: 70%;
   margin: 0 auto;
 }
-.mypage-box .btn-cont .btn-line-blue{
+.mypage-box .btn-cont .btn-line-blue {
   border: 1px solid #23ade4;
   background-color: #fff;
   color: #23ade4;
 }
 
-.mypage-box .btn-cont .btn-line-blue:hover{
+.mypage-box .btn-cont .btn-line-blue:hover {
   border: 1px solid #23ade4;
   background-color: #23ade4;
   color: #fff;
 }
-.mypage-box .input-cont{
-
+.mypage-box .input-cont {
   width: 85%;
   margin: 20px auto 30px auto;
 }
-.mypage-box .input-cont ul li{
+.mypage-box .input-cont ul li {
   margin-bottom: 20px;
   display: flex;
   justify-content: start;
@@ -694,13 +709,13 @@ h2.title {
   height: 34px;
   position: relative;
 }
-.mypage-box .input-cont ul li label{
+.mypage-box .input-cont ul li label {
   width: 20%;
   margin-right: 5px;
   text-align: left;
   color: #333;
 }
-.mypage-box .input-cont ul li input{
+.mypage-box .input-cont ul li input {
   border: none;
   height: 34px;
   border-bottom: 1px solid #e5e5e5;
@@ -709,14 +724,17 @@ h2.title {
   font-size: 17px;
   color: #333;
 }
-.mypage-box .input-cont ul li input:disabled{
+.mypage-box .input-cont ul li .flex {
+  flex: 1 !important;
+}
+
+.mypage-box .input-cont ul li input:disabled {
   background-color: #fff;
 }
-.mypage-box .input-cont ul li input:focus{
+.mypage-box .input-cont ul li input:focus {
   outline: none;
 }
-.mypage-box .input-cont ul li select{
-
+.mypage-box .input-cont ul li select {
   border: none;
   border-bottom: 1px solid #e5e5e5;
   height: 34px;
@@ -727,7 +745,7 @@ h2.title {
   position: relative;
   background: url("../images/ic-select-dot.png") right center no-repeat;
 }
-.mypage-box .input-cont ul li option::after{
+.mypage-box .input-cont ul li option::after {
   content: "";
   display: inline-block;
   position: absolute;
@@ -736,44 +754,47 @@ h2.title {
   width: 20px;
   height: 20px;
   z-index: 1;
-
 }
-.mypage-box .input-cont ul li select:focus{
+.mypage-box .input-cont ul li select:focus {
   outline: none;
 }
-.mypage-box .input-cont .btn-sm{
-  min-width:100px;
+.mypage-box .input-cont .btn-sm {
+  min-width: 115px;
   position: absolute;
   right: 0;
   top: 0;
 }
 
-.mypage-box .input-cont .total{
-  width:80%;
+.mypage-box.service-box ul li input,
+.mypage-box.service-box ul li select {
+  flex: 1;
+}
+
+.mypage-box .input-cont .total {
+  width: 80%;
   margin: 40px auto 50px auto;
   border: 2px solid #ff2626;
-  padding:10px 20px;
+  padding: 10px 20px;
   font-size: 20px;
   font-weight: 700;
 }
-.mypage-box .input-cont .total input{
+.mypage-box .input-cont .total input {
   width: 65%;
   border-bottom: none;
   font-size: 20px;
 }
-.mypage-box .input-cont .total input:disabled{
+.mypage-box .input-cont .total input:disabled {
   background-color: #fff;
 }
-.mypage-box .input-cont .total input:focus{
+.mypage-box .input-cont .total input:focus {
   outline: none;
 }
 
-.mypage-box .mypage-service{
+.mypage-box .mypage-service {
   color: #23ade4;
   background: url("../images/ic-servive-title.png") left top no-repeat;
   padding: 10px 0 10px 50px;
   text-align: left;
   margin-bottom: 30px;
   font-weight: 700;
-
 }
