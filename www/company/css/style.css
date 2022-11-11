@@ -712,7 +712,7 @@ h2.title {
   position: relative;
 }
 .mypage-box .input-cont ul li label {
-  width: 20%;
+  width: 21%;
   margin-right: 5px;
   text-align: left;
   color: #333;
@@ -799,4 +799,40 @@ h2.title {
   text-align: left;
   margin-bottom: 30px;
   font-weight: 700;
+}
+
+/*서비스소개*/
+.intro-wrap{
+  padding: 50px 0;
+  text-align: center;
+}
+
+.intro-wrap .intro-cont .cont{
+  margin-bottom: 20px;
+  padding: 4px;
+  color: #333;
+  min-height: 70px;
+  border-radius: 5px;
+}
+.intro-wrap .intro-cont .cont .flex-justify .tit{
+  height: 100%;
+  width: 20%;
+  text-align: center;
+  min-height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.intro-wrap .intro-cont .cont .flex-justify .txt{
+  height: 100%;
+  flex: 1;
+  background: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: left;
+  min-height: 70px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
 }
