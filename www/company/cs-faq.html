@@ -46,7 +46,94 @@
   </div>
 
 <div class="container">
-  내용 들어갑니다
+  <div class="cs-wrap">
+    <h2 class="title">
+      자주 묻는 질문
+    </h2>
+    <div class="faq-list">
+      <ul>
+        <li>
+          <button class="accordion">자주묻는 질문 입니다. </button>
+          <div class="panel" >
+            <p>내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.내용입니다. 내용입니다.</p>
+          </div>
+        </li>
+        <li>
+          <button class="accordion">자주묻는 질문 입니다. </button>
+          <div class="panel" >
+            <p>내용입니다. 내용입니다.</p>
+          </div>
+        </li>
+        <li>
+          <button class="accordion">자주묻는 질문 입니다. </button>
+          <div class="panel" >
+            <p>내용입니다. 내용입니다.</p>
+          </div>
+        </li>
+        <li>
+          <button class="accordion">자주묻는 질문 입니다. </button>
+          <div class="panel" >
+            <p>내용입니다. 내용입니다.</p>
+          </div>
+        </li>
+        <li>
+          <button class="accordion">자주묻는 질문 입니다. </button>
+          <div class="panel" >
+            <p>내용입니다. 내용입니다.</p>
+          </div>
+        </li>
+
+        <li>
+          <button class="accordion">자주묻는 질문 입니다. </button>
+          <div class="panel" >
+            <p>내용입니다. 내용입니다.</p>
+          </div>
+        </li>
+        <li>
+          <button class="accordion">자주묻는 질문 입니다. </button>
+          <div class="panel" >
+            <p>내용입니다. 내용입니다.</p>
+          </div>
+        </li>
+        <li>
+          <button class="accordion">자주묻는 질문 입니다. </button>
+          <div class="panel" >
+            <p>내용입니다. 내용입니다.</p>
+          </div>
+        </li>
+        <li>
+          <button class="accordion">자주묻는 질문 입니다. </button>
+          <div class="panel" >
+            <p>내용입니다. 내용입니다.</p>
+          </div>
+        </li>
+        <li>
+          <button class="accordion">자주묻는 질문 입니다. </button>
+          <div class="panel" >
+            <p>내용입니다. 내용입니다.</p>
+          </div>
+        </li>
+
+
+      </ul>
+      <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+          });
+        }
+      </script>
+    </div>
+  </div>
 </div>
 <div w3-include-html="footer.html"></div>
 <script>
