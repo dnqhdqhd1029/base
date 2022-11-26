@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="eqmts002_report" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="70" bottomMargin="20" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="1d4b3329-ebaa-4d8b-a2d5-b83d8aa2d99a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SWNERP"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="SEARCH_MCH_CODE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT  EMM_MCH_CODE,				/*설비번호(코드) selectEqmtMtList*/
+		        EMM_MCH_NAME,         		/*설비명*/
+		        EMM_TYPE_DESC,         		/*형식규격*/
+		        EMM_MAFA_NAME,         		/*제조자명*/
+		        EMM_MAFA_NBR,         		/*제조번호*/
+		        FORMAT(EMM_PURC_DATE, 'yyyy-MM-dd') 			AS EMM_PURC_DATE,		/*구매일*/
+				EMM_INST_WKCTR,         	/*설치장소(작업장명)*/
+		        EMM_MCH_MNGR,         		/*설비관리자명(사원명)*/
+		        EMM_MCH_PRC, 				/*구매가격*/
+		        EMM_SPEC_DESC,         		/*설비사양설명*/
+		        EMM_PART_DESC,         		/*부속품설명*/
+		        EMM_MCH_STATUS,         	/*설비상태 코드*/
+		        (SELECT SGD_SYS_NAME FROM SYS_GROUP_DT WHERE SGD_GROUP_CODE='EQMT_STS' AND SGD_SYS_CODE=EMM_MCH_STATUS) AS EMM_MCH_STATUS_DESC,	/*설비상태명칭*/ 
+                ISNULL(EMM_FILE_PATH, 'd:\upload'+EMM_FILE_PATH) AS EMM_FILE_PATH, /*이미지경로파일명*/		
+		        SUM(EMM_MCH_PRC) OVER ()				AS EMM_MCH_TOT_PRC, 	/*조회 결과 전체 수리금액 합산*/
+		        COUNT(*) OVER() 						AS TOTALCOUNT    		/*조회 결과 수*/
+		FROM    EQMT_MNG_MT
+		WHERE  EMM_MCH_CODE = $P{SEARCH_MCH_CODE}]]>
+	</queryString>
+	<field name="EMM_MCH_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_MCH_CODE"/>
+	</field>
+	<field name="EMM_MCH_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_MCH_NAME"/>
+	</field>
+	<field name="EMM_TYPE_DESC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_TYPE_DESC"/>
+	</field>
+	<field name="EMM_MAFA_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_MAFA_NAME"/>
+	</field>
+	<field name="EMM_MAFA_NBR" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_MAFA_NBR"/>
+	</field>
+	<field name="EMM_PURC_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_PURC_DATE"/>
+	</field>
+	<field name="EMM_INST_WKCTR" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_INST_WKCTR"/>
+	</field>
+	<field name="EMM_MCH_MNGR" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_MCH_MNGR"/>
+	</field>
+	<field name="EMM_MCH_PRC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_MCH_PRC"/>
+	</field>
+	<field name="EMM_SPEC_DESC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_SPEC_DESC"/>
+	</field>
+	<field name="EMM_PART_DESC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_PART_DESC"/>
+	</field>
+	<field name="EMM_MCH_STATUS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_MCH_STATUS"/>
+	</field>
+	<field name="EMM_MCH_STATUS_DESC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_MCH_STATUS_DESC"/>
+	</field>
+	<field name="EMM_FILE_PATH" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_FILE_PATH"/>
+	</field>
+	<field name="EMM_MCH_TOT_PRC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_MCH_TOT_PRC"/>
+	</field>
+	<field name="TOTALCOUNT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TOTALCOUNT"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="505" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="40" uuid="e961053c-6971-4946-a3dc-ae38b8150b62">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="300" bottomPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="12"/>
+				</textElement>
+				<text><![CDATA[           ( 제 조 ) 설 비 대 장
+EQUIPMENT CONTROL RECORD (ECR)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="100" height="30" uuid="e402e0a4-9f77-4c60-83df-3bed254d57c1"/>
+				<box topPadding="2" leftPadding="12" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[     설  비  명
+Equipment Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="100" height="30" uuid="33f771b6-78bc-4aee-b691-623383c90936"/>
+				<box topPadding="2" leftPadding="18" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[  제 조 자 명
+Manufacturer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="100" height="30" uuid="fbc65d6e-29ca-46eb-a8e4-2c4e5e2edc22"/>
+				<box topPadding="2" leftPadding="21" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[ 설 치 장 소
+Install Place]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="40" width="168" height="30" uuid="60fd7ff9-bba7-4333-a87d-a7d9bfac87d4"/>
+				<box topPadding="7" leftPadding="4" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_MCH_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="70" width="168" height="30" uuid="9e9374b0-43a6-46a8-b5e8-35eebf3345a2"/>
+				<box topPadding="7" leftPadding="4" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_MAFA_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="100" width="168" height="30" uuid="6077e6b7-b31a-48a7-a007-5f6a5bc967cc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="7" leftPadding="4" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_INST_WKCTR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="268" y="40" width="100" height="30" uuid="413644c4-0edf-4f08-a4d0-ded7d0515a5c"/>
+				<box topPadding="2" leftPadding="16" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[  설 비 번 호
+Equipment No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="100" width="100" height="30" uuid="a59646b0-c703-45fe-bead-26f49241c2e7"/>
+				<box topPadding="2" leftPadding="23" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[ 관  리  자
+Personnel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="70" width="100" height="30" uuid="3ed68a15-a783-46c0-8035-da790b70e388"/>
+				<box topPadding="2" leftPadding="6" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[     제 조 번 호
+Mamufacturing No.]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="635" y="100" width="167" height="30" uuid="880b1f78-55d0-499a-b65a-08c16e7fdad4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="7" leftPadding="4" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_MCH_PRC}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="635" y="40" width="167" height="30" uuid="3929d246-718f-4945-a6be-5cadb6758feb">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="7" leftPadding="4" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_TYPE_DESC}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="635" y="70" width="167" height="30" uuid="05aa4ce6-fe24-4a63-bcc0-d35891790104">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="7" leftPadding="4" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_PURC_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="535" y="100" width="100" height="30" uuid="10036cd1-3dff-4471-808c-2e9aff229df3"/>
+				<box topPadding="2" leftPadding="30" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[가     격
+ C o s t]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="535" y="70" width="100" height="30" uuid="e98dfd89-3c8f-45bb-8491-ef2dfa5e5663"/>
+				<box topPadding="2" leftPadding="12" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[   구 입 일 자
+Purchase Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="535" y="40" width="100" height="30" uuid="f87a2c24-7794-4c3b-a474-29d0302dee9a"/>
+				<box topPadding="2" leftPadding="26" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[형식, 규격
+  T y p e]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="368" y="100" width="167" height="30" uuid="61d0b7fe-dcf2-49cf-bd48-7f2b1d1350ac">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="7" leftPadding="4" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_MCH_MNGR}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="368" y="40" width="167" height="30" uuid="9740382f-0bc1-411d-85d1-d3ca77536d03">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="7" leftPadding="4" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_MCH_CODE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="368" y="70" width="167" height="30" uuid="fbb991a1-ff48-4e67-aa0d-9e46d1259f80">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="7" leftPadding="4" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_MAFA_NBR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="130" width="100" height="94" uuid="0779a20a-90ec-44d5-ac13-48f80f4a4c23"/>
+				<box topPadding="31" leftPadding="18" bottomPadding="18" rightPadding="18">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[ 설 비  사 양
+Specification]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="130" width="702" height="94" uuid="bdd93b41-5445-4ac6-b84c-b9e1a6c6ace1"/>
+				<box padding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_SPEC_DESC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="224" width="280" height="30" uuid="b970590d-75d0-4bdc-bb48-3a4e0944da87"/>
+				<box topPadding="2" leftPadding="100" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[부       속        품
+     P  a  r  t]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="254" width="280" height="230" uuid="54095088-f06a-443d-8012-fe5c8e61a889"/>
+				<box padding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_PART_DESC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="224" width="522" height="260" uuid="b9eb792d-7e91-4fc1-a9a6-b96119f3e9a5"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="724" y="486" width="78" height="16" uuid="9a9d6eac-9f2d-4d60-8aa9-02f89b2d37e1"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[A4 ( 210 x 297 )]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="486" width="100" height="16" uuid="d8cf25a3-1994-4f6e-a8db-1c9880f9a33b"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[From 441-03 Rev.0]]></text>
+			</staticText>
+			<image>
+				<reportElement x="281" y="224" width="522" height="260" uuid="c352f078-7e8a-4803-8eff-583f5363a25a"/>
+				<imageExpression><![CDATA[$F{EMM_FILE_PATH}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="406" y="475" width="100" height="30" uuid="5cf05107-f073-4798-9208-313a5f23ac18"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

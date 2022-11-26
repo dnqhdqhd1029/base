@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="eqmts022_list" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="34e50324-0562-4454-bc9f-9c4dc2168f4e">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SWNERP"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="SEARCH_MCH_CODE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT  	ERH_MCH_CODE,
+			EMM_MCH_NAME+ '('+EMM_TYPE_DESC+')' AS EMM_MCH_NAME,         		/*설비명*/
+			FORMAT(EMM_PURC_DATE, 'yyyy-MM-dd') 			AS EMM_PURC_DATE,		/*구매일*/
+			CONVERT(VARCHAR,EMM_MCH_PRC) + '원' 			AS EMM_MCH_PRC, 		/*구매가격*/
+			ERH_REPA_SEQ,		/*연번(설비번호별SEQ)*/
+			FORMAT(ERH_REPA_DATE, 'yyyy-MM-dd') AS ERH_REPA_DATE,		/*수리일자*/
+			ERH_REPA_HIST,		/*수리내역*/
+			ERH_REPA_AMT,		/*수리금액*/
+			ERH_REPA_PATN,		/*수리업체*/
+			ERH_PRES_SITU,		/*현재상태*/
+			ERH_MALF_CAUSE,		/*고장원인*/
+			ERH_REPA_RMKS,		/*비고사항*/
+			ISNULL(ERH_FILE_PATH,'d:\upload'+ERH_FILE_PATH) AS ERH_FILE_PATH 		/*등록이미지경로*/
+	FROM    EQMT_REPAIR_HT
+	    INNER JOIN EQMT_MNG_MT ON ( ERH_MCH_CODE = EMM_MCH_CODE )
+				    AND LOWER(ERH_MCH_CODE) = LOWER($P{SEARCH_MCH_CODE})
+				    ORDER BY ERH_REPA_SEQ]]>
+	</queryString>
+	<field name="ERH_MCH_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ERH_MCH_CODE"/>
+	</field>
+	<field name="EMM_MCH_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_MCH_NAME"/>
+	</field>
+	<field name="EMM_PURC_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_PURC_DATE"/>
+	</field>
+	<field name="EMM_MCH_PRC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMM_MCH_PRC"/>
+	</field>
+	<field name="ERH_REPA_SEQ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ERH_REPA_SEQ"/>
+	</field>
+	<field name="ERH_REPA_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ERH_REPA_DATE"/>
+	</field>
+	<field name="ERH_REPA_HIST" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ERH_REPA_HIST"/>
+	</field>
+	<field name="ERH_REPA_AMT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ERH_REPA_AMT"/>
+	</field>
+	<field name="ERH_REPA_PATN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ERH_REPA_PATN"/>
+	</field>
+	<field name="ERH_PRES_SITU" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ERH_PRES_SITU"/>
+	</field>
+	<field name="ERH_MALF_CAUSE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ERH_MALF_CAUSE"/>
+	</field>
+	<field name="ERH_REPA_RMKS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ERH_REPA_RMKS"/>
+	</field>
+	<field name="ERH_FILE_PATH" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ERH_FILE_PATH"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="7" width="240" height="53" uuid="94a85b95-b1ab-40f2-9574-efd71c4cc01e"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="33"/>
+				</textElement>
+				<text><![CDATA[장비수리검토서]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="0" width="20" height="61" uuid="0a38dad9-929d-4e22-a0e2-37d6fe5fd52a"/>
+				<box topPadding="10" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[결
+
+재]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="0" width="51" height="61" uuid="c6433500-a3e2-4425-b3fb-5e5b1af0f736"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="0" width="51" height="61" uuid="2a650191-3d30-44ee-a061-0d35954a9d61"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="0" width="51" height="61" uuid="9128ffcb-5507-46a6-aeab-21894b4ae276"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="0" width="51" height="61" uuid="f815948f-54b9-4804-84ec-98a5ddd72c99"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="0" width="51" height="15" uuid="773bce13-7ebd-460e-814b-a7a5cb873349">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="11" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[부서장]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="0" width="51" height="15" uuid="e37e46f7-6bf1-4e60-8d68-b8517221ea9a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="11" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[임   원]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="0" width="51" height="15" uuid="14077490-9fae-4902-9025-564ba94d0b28">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="11" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[사   장]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="0" width="51" height="15" uuid="6f78868e-a1d0-4f4b-809b-c839456fd339">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="11" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[담   당]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="3" width="66" height="17" uuid="89664361-8f16-486e-9f5d-00adbcf1e4be">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[1.장비이력]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="20" width="414" height="20" uuid="2727c229-e204-467f-8032-e1b25eb01435"/>
+				<box topPadding="3" leftPadding="5" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_MCH_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="40" width="414" height="20" uuid="dfdca7ec-b039-4b6a-a720-e5eef69483eb"/>
+				<box topPadding="3" leftPadding="5" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_PURC_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="60" width="414" height="20" uuid="a97fb0e3-4ffe-4c3f-b848-eac70534a927"/>
+				<box topPadding="3" leftPadding="5" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMM_MCH_PRC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="140" height="20" uuid="388f7232-8dd4-4f68-ad00-d4d5c8a4ffee">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="45" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[장   비   명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="140" height="20" uuid="2f46e873-da83-456c-8d60-8a83ee536c1f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="45" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[구 입 연 도]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="140" height="20" uuid="d572c16d-fef0-4b33-a454-1d4996e292b1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="45" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[구 입 가 격]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="12" width="86" height="17" uuid="5f1afcf7-11b6-4d06-9ea2-885692627f7f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[2. 최근 수리 이력]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="29" width="110" height="20" uuid="1d6fe8ec-cce7-4ec1-bc9b-60fac5c7bf46">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="35" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[수리일자]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="29" width="240" height="20" uuid="c1e14aa5-4aa4-41ca-adc2-4c57e7b4fbd7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="94" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[수 리 내 역]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="29" width="100" height="20" uuid="9fbf0f75-cb22-4845-a5a6-be256cd3a162">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="33" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[금    액]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="29" width="104" height="20" uuid="4531ad65-b847-4efb-8bb2-f5fbee559b12">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="27" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[수리업체명]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="110" height="20" uuid="e18b4914-39b8-44db-9dbf-7cb0e3aa9bd4"/>
+				<box topPadding="3" leftPadding="30" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ERH_REPA_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="110" y="0" width="240" height="20" uuid="dad82a6c-83a6-42bb-bbe3-ad8fcd109afa"/>
+				<box padding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ERH_REPA_HIST}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="350" y="0" width="100" height="20" uuid="f078bcf3-e232-44d7-847d-1bde8f4cc015"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Justified">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ERH_REPA_AMT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="450" y="0" width="104" height="20" uuid="8f2fc96b-2207-4b48-af3f-8d39ed656b90"/>
+				<box topPadding="3" leftPadding="9" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ERH_REPA_PATN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="130" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="9" width="86" height="17" uuid="195ada8b-ab45-46ec-858c-cc7ec950598b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[3. 수 리 내 역]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="26" width="101" height="20" uuid="01d10909-9f1d-47f0-a534-9d93de3601c0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="20" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[수리비용(금액)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="26" width="213" height="20" uuid="c85742a5-de33-483f-827b-b3b1a46fa227">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="85" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[수리사항]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="26" width="120" height="20" uuid="b053b5f4-219a-4c07-8c6a-5ea6c265776c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="39" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[현재상태]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="46" width="120" height="84" uuid="7a646724-47ae-435c-93a0-d27b3c069c10"/>
+				<box padding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ERH_PRES_SITU}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="240" y="46" width="213" height="84" uuid="a5ca1554-d299-4914-b7dd-8e830006065f"/>
+				<box padding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ERH_REPA_HIST}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="453" y="46" width="101" height="84" uuid="dec6e277-c00c-4ec3-838d-426764b0863d"/>
+				<box padding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ERH_REPA_AMT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="120" y="46" width="120" height="84" uuid="a4dae1ed-a6f7-4134-be22-dc28e905ccf4"/>
+				<box padding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ERH_MALF_CAUSE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="120" y="26" width="120" height="20" uuid="8a7d4892-aa67-47b4-9e29-c64849161f0e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="39" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[고장원인]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="134" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="13" width="76" height="17" uuid="3a58738e-3302-4dc8-814a-21cbedcab78f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[4. 수 리 업 체 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="42" width="76" height="17" uuid="90664c21-407b-40aa-b535-0eb1d3fcd49f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[5. 수 리 일 자 : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="13" width="200" height="17" uuid="e945e8bc-b588-45e0-85da-a04a570bacd0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ERH_REPA_PATN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="42" width="200" height="17" uuid="6ede15e9-a595-41b4-800d-bf02d20c91bb"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ERH_REPA_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="10" width="235" height="120" uuid="3f013e2a-ec45-4ae3-aeef-053b0c8f3627"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="70" width="200" height="17" uuid="0ba0c772-52fa-4d59-93e9-9ddde587796b"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ERH_REPA_RMKS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="70" width="76" height="17" uuid="a6c510d2-93fa-4efe-bbc7-76699806ee3f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="맑은 고딕." size="10"/>
+				</textElement>
+				<text><![CDATA[6. 비 고 사 항 : ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="311" y="10" width="234" height="120" uuid="16ed2189-39d3-449a-a844-0c919b835d8d"/>
+				<imageExpression><![CDATA[$F{ERH_FILE_PATH}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+</jasperReport>

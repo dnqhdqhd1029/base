@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prit223_list" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="07f7ad71-5fe9-4ef4-9cbd-53c98083b98d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SWORERP"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="dateFrom" class="java.lang.String"/>
+	<parameter name="dateTo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[WITH TABLE_A(IDX, Sdt, Edt) AS ( SELECT 1, $P{dateFrom}, $P{dateTo} )
+		SELECT *
+  FROM (
+SELECT FORMAT(MWO_END_DATE, 'yyyy-MM-dd') AS MWO_END_DATE,
+       COUNT(*) AS TOTAL,
+       SUM(CASE WHEN FORMAT(SOD_PRM_DATE, 'yyyyMMdd') >= FORMAT(MWO_END_DATE, 'yyyyMMdd') THEN 1 ELSE 0 END) COMP,
+       SUM(CASE WHEN FORMAT(SOD_PRM_DATE, 'yyyyMMdd') >= FORMAT(MWO_END_DATE, 'yyyyMMdd') THEN 0 ELSE 1 END) FAIL,
+       ROUND(SUM(CASE WHEN FORMAT(SOD_PRM_DATE, 'yyyyMMdd') >= FORMAT(MWO_END_DATE, 'yyyyMMdd') THEN 1 ELSE 0 END) / COUNT(*) * 100,2) AS RAID,
+       FORMAT(GETDATE(), 'yyyy-MM-dd') AS PRINT_DAY
+  FROM SALES_ORDER_DT, HT_PROD_PLAN, MT_WORK_ORD
+ WHERE MWO_STATUS_CODE = '12' AND SOD_SITE_CD= HPP_SITE_CD
+   AND SOD_SO_NBR = HPP_SOLD_NBR
+   AND SOD_SO_SEQ = HPP_SOLD_LN
+   AND HPP_SITE_CD = MWO_SITE_CD
+   AND HPP_PLAN_NBR = MWO_PLAN_NO
+   AND MWO_PLAN_SEQ LIKE '%' + HPP_PLAN_SEQ + '%'
+   AND FORMAT(MWO_END_DATE, 'yyyyMMdd') >= REPLACE($P{dateFrom}, '-', '')
+   AND FORMAT(MWO_END_DATE, 'yyyyMMdd') <= REPLACE($P{dateTo}, '-', '')
+ GROUP BY FORMAT(MWO_END_DATE, 'yyyy-MM-dd')
+ ) A
+UNION ALL
+SELECT '    합계' AS MWO_END_DATE,
+       COUNT(*) AS TOTAL,
+       SUM(CASE WHEN FORMAT(SOD_PRM_DATE, 'yyyyMMdd') >= FORMAT(MWO_END_DATE, 'yyyyMMdd') THEN 1 ELSE 0 END) COMP,
+       SUM(CASE WHEN FORMAT(SOD_PRM_DATE, 'yyyyMMdd') >= FORMAT(MWO_END_DATE, 'yyyyMMdd') THEN 0 ELSE 1 END) FAIL,
+       ROUND(SUM(CASE WHEN FORMAT(SOD_PRM_DATE, 'yyyyMMdd') >= FORMAT(MWO_END_DATE, 'yyyyMMdd') THEN 1 ELSE 0 END) / COUNT(*) * 100,2) AS RAID,
+       FORMAT(GETDATE(), 'yyyy-MM-dd') AS PRINT_DAY
+  FROM SALES_ORDER_DT, HT_PROD_PLAN, MT_WORK_ORD
+ WHERE MWO_STATUS_CODE = '12' AND SOD_SITE_CD= HPP_SITE_CD
+   AND SOD_SO_NBR = HPP_SOLD_NBR
+   AND SOD_SO_SEQ = HPP_SOLD_LN
+   AND HPP_SITE_CD = MWO_SITE_CD
+   AND HPP_PLAN_NBR = MWO_PLAN_NO
+   AND MWO_PLAN_SEQ LIKE '%' + HPP_PLAN_SEQ + '%'
+   AND FORMAT(MWO_END_DATE, 'yyyyMMdd') >= REPLACE($P{dateFrom}, '-', '')
+   AND FORMAT(MWO_END_DATE, 'yyyyMMdd') <=REPLACE($P{dateTo}, '-', '')
+UNION ALL
+SELECT '총생산일수' AS MWO_END_DATE,
+       DATEDIFF(d, Sdt, Edt)
+       - (DATEDIFF(d, Sdt, Edt) + DATEPART(dw, Sdt)) /7  
+       - (DATEDIFF(d, Sdt, Edt) + DATEPART(dw, DATEADD(d, -1, Sdt))) /7  
+	   + 1 -
+	   (
+		SELECT SUM(CASE WHEN $P{dateFrom} <=  FORMAT(CAST(SGD_SYS_CODE AS DATE), 'yyyyMMdd') AND FORMAT(CAST(SGD_SYS_CODE AS DATE), 'yyyyMMdd') <= $P{dateTo} THEN 1 ELSE 0 END) AS TOTAL
+ 		 FROM SYS_GROUP_DT WHERE SGD_GROUP_CODE = 'WKDATE'
+  	   ) AS TOTAL,
+       null AS COMP,
+       null AS FAIL,
+       null AS RAID,
+       FORMAT(GETDATE(), 'yyyy-MM-dd') AS PRINT_DAY
+  FROM TABLE_A
+ WHERE IDX = 1]]>
+	</queryString>
+	<field name="MWO_END_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MWO_END_DATE"/>
+	</field>
+	<field name="TOTAL" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="TOTAL"/>
+	</field>
+	<field name="COMP" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="COMP"/>
+	</field>
+	<field name="FAIL" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="FAIL"/>
+	</field>
+	<field name="RAID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="RAID"/>
+	</field>
+	<field name="PRINT_DAY" class="java.lang.String"/>
+	<title>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="50" uuid="11ea004b-9563-4eba-859d-3869e2093147">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="9" leftPadding="170"/>
+				<textElement textAlignment="Left">
+					<font fontName="맑은 고딕." size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[생산납기준수보고서]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="20" uuid="954d6283-988f-4eed-a5dd-d2ae1562617e"/>
+				<box topPadding="2"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="12"/>
+				</textElement>
+				<text><![CDATA[생산일자 : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="0" width="70" height="20" uuid="f2e6af93-63ec-46bc-80b1-4dec2cd95f7f"/>
+				<box topPadding="2"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateFrom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="130" y="0" width="20" height="20" uuid="ad27d3b6-17e3-4bda-b39d-5bc1a3ed1358"/>
+				<box topPadding="2"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="12"/>
+				</textElement>
+				<text><![CDATA[ ~]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="0" width="80" height="20" uuid="00e30722-9501-4821-819f-41baa456fd4c"/>
+				<box topPadding="2"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateTo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="75" height="20" uuid="a959d8a2-ab04-40c7-b64e-b9145aa58bbc"/>
+				<box topPadding="2"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRINT_DAY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="420" y="0" width="60" height="20" uuid="11a33ba5-7d59-4927-b4d0-1e028782ac26"/>
+				<box topPadding="2"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="12"/>
+				</textElement>
+				<text><![CDATA[출력일자 : ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="23fc14c1-ded1-4b68-9e62-8754060b9a6c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ad021458-acba-4461-a3fb-fe915b5f407a"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="43">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[일자]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="110" height="20" uuid="f951590b-25f3-4d3f-ae6b-9c54f34bcb04">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f11986dc-7758-4cca-a081-96195f7cccad"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="44">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[총건수]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="0" width="120" height="20" uuid="ab8f9464-2afd-478a-9d8f-a85d20b6290e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef0abb08-7329-4bd3-9e71-34859e88c967"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="42">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[준수건수]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="110" height="20" uuid="6b09ffdc-d95c-4b95-805e-3a33f7a1e342">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="78068587-06cb-4944-801b-197f751010d2"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="35">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[미준수건]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="115" height="20" uuid="a633b245-62b6-4d3b-8d6b-9119fa68e8ea">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7285fb49-3b9e-4b98-8129-52fefd01a9ef"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="35">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[납기준수율]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="100" height="20" uuid="c5486514-1082-4129-9840-9250bca500ed">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ad021458-acba-4461-a3fb-fe915b5f407a"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="20">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MWO_END_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="0" width="110" height="20" uuid="99aa1e96-59da-4094-819a-822275d1f9b0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f11986dc-7758-4cca-a081-96195f7cccad"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="40">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="210" y="0" width="120" height="20" uuid="cb3e0d51-e9a8-41fb-b90c-deb60d61a9de">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef0abb08-7329-4bd3-9e71-34859e88c967"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="40">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COMP}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="330" y="0" width="110" height="20" uuid="6ab16adf-247d-4fe7-92bf-6957dd96f291">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="78068587-06cb-4944-801b-197f751010d2"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="40">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FAIL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="440" y="0" width="115" height="20" uuid="3f21811b-553a-4041-9a3c-e546bc600317">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7285fb49-3b9e-4b98-8129-52fefd01a9ef"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="40">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RAID}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

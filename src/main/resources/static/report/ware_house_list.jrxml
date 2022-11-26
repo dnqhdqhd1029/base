@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ware_house_list" columnCount="5" pageWidth="595" pageHeight="842" columnWidth="111" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ebce41a1-3e96-4964-874a-6c68ebb5df15">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SW"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="site" class="java.lang.String"/>
+	<parameter name="whCd" class="java.lang.String"/>
+	<parameter name="rack" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+		    MWC_WH_CD,	    /*창고코드*/
+		    SGD_SYS_NAME AS MWC_WH_DESC,
+		    WMC_RACK_NO AS MWC_RACK_NO,	/*Rack번호*/
+		    WMC_WH_DESC AS MWC_WH_DESC,	/*창고명칭*/
+		    MWC_WH_CD + '^' + WMC_RACK_NO + '^' AS QR_CODE
+		FROM
+		    MT_WAREHOUSE_CODE
+		    JOIN SYS_GROUP_DT ON(SGD_SYS_CODE = MWC_WH_CD AND SGD_GROUP_CODE = 'W01')
+   	   WHERE MWC_SITE_CD = $P{site}
+         AND MWC_WH_CD   = $P{whCd}
+         AND $P{rack} LIKE CASE  WHEN $P{rack} = 'ALL' THEN '%' ELSE '%' + WMC_RACK_NO + '%' END]]>
+	</queryString>
+	<field name="MWC_WH_CD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MWC_WH_CD"/>
+	</field>
+	<field name="QR_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="QR_CODE"/>
+	</field>
+	<field name="MWC_WH_DESC" class="java.lang.String"/>
+	<field name="MWC_RACK_NO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="80" height="30" uuid="b73806fe-a1a5-4326-866d-1d1bc5ce1f32"/>
+				<box topPadding="4"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="16"/>
+				</textElement>
+				<text><![CDATA[창고코드 :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="1" width="60" height="30" uuid="cad7c1ac-6f1c-4090-bc55-344701bf8a1f"/>
+				<box topPadding="4"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="16"/>
+				</textElement>
+				<text><![CDATA[창고명 :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="1" width="140" height="30" uuid="237b2b1b-7b1c-45da-a355-f16b262b14ce"/>
+				<box topPadding="4"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MWC_WH_CD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="0" width="194" height="30" uuid="a7fc5a29-f630-4fad-9d7a-8d5dab5b282f"/>
+				<box topPadding="4"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MWC_WH_DESC}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="132" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="15" y="12" width="80" height="81" uuid="b979ccaf-1710-4cad-907e-cc1051f50445"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+			</textField>
+			<image>
+				<reportElement x="25" y="22" width="60" height="60" uuid="9c6af9b3-9578-4edd-8468-44c0f3a68afb"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
+					    new com.google.zxing.qrcode.QRCodeWriter().encode($F{QR_CODE}, 
+					        com.google.zxing.BarcodeFormat.QR_CODE, 500, 500))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="15" y="93" width="80" height="30" uuid="d4db5432-215a-4026-a649-0702a79e7bcc"/>
+				<box topPadding="7" leftPadding="25">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{MWC_RACK_NO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

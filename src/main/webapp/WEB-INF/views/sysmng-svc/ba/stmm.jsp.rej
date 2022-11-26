@@ -1,0 +1,33 @@
+diff a/base/base/src/main/webapp/WEB-INF/views/sysmng-svc/ba/stmm.jsp b/base/base/src/main/webapp/WEB-INF/views/sysmng-svc/ba/stmm.jsp	(rejected hunks)
+@@ -204,26 +204,28 @@
+ 				<table width="100%">
+ 					<thead>
+ 						<tr>
+-							<td Name="SygmNo" visibility="hidden"></td>
++							<td Name="SygmNO" visibility="hidden"></td>
++							<td Name="SygmIdx" visibility="SygmIdx"></td>
+ 							<td Name="SygmGroupCode" align="center" width="120px">그룹코드</td>
+ 							<td Name="SygmGroupName" align="" width="120px">그룹코드명</td>
+ 							<td Name="SygmIsUse" align="center" width="80px">사용여부</td>
+ 							<td Name="SygmIsDel" align="center" width="80px">삭제가능</td>
+ 							<td Name="SygmGroupType" align="center" width="80px">구분</td>
+ 							<td Name="SygmGroupDepth" align="center" width="60px">분류</td>
+-							<td Name="SygmGroupDesc " align="" width="*">상세</td>
++							<td Name="SygmGroupDesc" align="" width="*">상세</td>
+ 						</tr>
+ 					</thead>
+ 					<tbody>
+ 						<tr>
+ 							<td Name="SygmNO" bind="SygmNO"></td>
++							<td Name="SygmIdx" bind="SygmIdx"></td>
+ 							<td data-key Name="SygmGroupCode" bind="SygmGroupCode"></td>
+ 							<td data-key Name="SygmGroupName" bind="SygmGroupName"></td>
+ 							<td data-key Name="SygmIsUse" bind="SygmIsUse"></td>
+ 							<td data-key Name="SygmIsDel" bind="SygmIsDel"></td>
+ 							<td data-key Name="SygmGroupType" bind="SygmGroupTypeName"></td>
+ 							<td data-key Name="SygmGroupDepth" bind="SygmGroupDepth"></td>
+-							<td data-key Name="SygmGroupDesc " bind="SygmGroupDesc "></td>
++							<td data-key Name="SygmGroupDesc" bind="SygmGroupDesc"></td>
+ 						</tr>
+ 					</tbody>
+ 				</table>
