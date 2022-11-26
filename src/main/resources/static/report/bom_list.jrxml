@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bom_list" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="868b2a8e-9d5f-48ec-8ac2-d4189d82e5f6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SW"/>
+	<parameter name="site" class="java.lang.String"/>
+	<parameter name="pscmItem" class="java.lang.String"/>
+	<parameter name="qty" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[WITH AA AS  
+		    (
+		    SELECT PSCM_PAR, PSCM_COMP, PSCM_QTY_PER, PSCM_START, PSCM_END FROM PSCM_MT
+		    ), BB AS (
+		    SELECT ITEM_PART, ITEM_DESC1, ITEM_DESC2, ITEM_UM FROM V_ITEM_MT
+		    ),
+			ITEM AS (
+	          SELECT 
+	               1 AS LEV,
+	               (SELECT ITEM_DESC1 FROM BB WHERE ITEM_PART = A.PSCM_COMP) AS ITEM_DESC1, 
+				   (SELECT ITEM_UM FROM BB WHERE ITEM_PART = A.PSCM_COMP) AS ITEM_UM,
+				   A.PSCM_COMP,
+				   A.PSCM_QTY_PER,
+				   ROW_NUMBER() OVER(ORDER BY A.PSCM_PAR, A.PSCM_COMP) AS RM,
+	               CONVERT(NVARCHAR(1000), '/' + A.PSCM_COMP ) AS SORT
+	           FROM (
+	               SELECT PSCM_PAR, PSCM_COMP, PSCM_QTY_PER
+			               FROM AA
+                   		      WHERE PSCM_START <=  FORMAT(GETDATE(), 'yyyyMMdd')
+			                AND PSCM_END   >=  FORMAT(GETDATE(), 'yyyyMMdd')
+	                 )A
+				WHERE A.PSCM_PAR = $P{pscmItem}
+	          UNION ALL
+	          SELECT 
+	               ITEM.LEV + 1 AS LEV,
+	               (SELECT ITEM_DESC1 FROM BB WHERE ITEM_PART = B.PSCM_COMP) AS ITEM_DESC1, 
+				   (SELECT ITEM_UM FROM BB WHERE ITEM_PART = B.PSCM_COMP) AS ITEM_UM,
+				   B.PSCM_COMP,
+				   B.PSCM_QTY_PER,
+				   ROW_NUMBER() OVER(ORDER BY B.PSCM_PAR, B.PSCM_COMP) AS RM,
+	               CONVERT(NVARCHAR(1000), ITEM.SORT + '/' + B.PSCM_COMP ) AS SORT
+	           FROM (
+	               SELECT PSCM_PAR, PSCM_COMP, PSCM_QTY_PER
+			               FROM AA
+                   		      WHERE PSCM_START <=  FORMAT(GETDATE(), 'yyyyMMdd')
+			                AND PSCM_END   >=  FORMAT(GETDATE(), 'yyyyMMdd')
+	                 )B, ITEM
+	           WHERE ITEM.PSCM_COMP = B.PSCM_PAR
+	         	)
+		         SELECT
+		            CASE WHEN A1.LEV != '1' THEN '.' ELSE '' END
+					+ REPLICATE('.',LEV - 1) + CAST(LEV AS CHAR) AS LEV,
+		                   RM,
+						   SORT,
+					       PSCM_COMP AS ITEM_PART, 
+					       A1.ITEM_DESC1, 
+					       A1.ITEM_UM,
+						   FORMAT(ISNULL(B1.MII_QTY_AVAIL,0), N'#,0') AS QTY_AVAIL, 
+					       FORMAT(ISNULL(B1.MII_QTY_PO,0), N'#,0') AS QTY_PO, 
+					       FORMAT(ISNULL(A1.PSCM_QTY_PER,0) * ISNULL($P{qty},0), N'#,0')  AS QTY_REQ,
+					       FORMAT(ISNULL(B1.MII_QTY_AVAIL,0) - ISNULL(A1.PSCM_QTY_PER,0) * ISNULL($P{qty},0), N'#,0') AS QTY_BU,
+					       (SELECT F.IBM_ITEM_DESC FROM ITEM_BASIC_MT F WHERE F.IBM_ITEM_NO = $P{pscmItem}) AS P_ITEM_NM,
+					       (SELECT PLCM_DESC FROM PLCM_MT WHERE PLCM_PROD_LINE = (SELECT ITEM_PROD_LINE FROM V_ITEM_MT WHERE ITEM_PART = PSCM_COMP)) AS ITEM_PART_TYPE,
+		                   (SELECT CASE WHEN ITEM_PM_CODE = 'M' THEN '생산품목(M)' WHEN ITEM_PM_CODE = 'P' THEN '구매품목(P)' WHEN ITEM_PM_CODE = 'S' THEN '외주가공(S)' ELSE ITEM_PM_CODE END FROM V_ITEM_MT WHERE ITEM_PART = PSCM_COMP) AS ITEM_PM_CODE,
+		                   (SELECT CASE WHEN ITEM_USR_CHR12 = 'Y' THEN '조립(Y)' WHEN ITEM_USR_CHR12 = 'N' THEN '가공(N)' ELSE ITEM_USR_CHR12 END FROM V_ITEM_MT WHERE ITEM_PART = PSCM_COMP) AS ITEM_USR_CHR12
+		         FROM ITEM A1
+				 LEFT JOIN (SELECT * FROM ITEM_INV_MT WHERE MII_SITE_CD =$P{site}) B1 ON A1.PSCM_COMP = B1.MII_PART_NO
+			    ORDER BY SORT]]>
+	</queryString>
+	<field name="LEV" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="LEV"/>
+	</field>
+	<field name="RM" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="RM"/>
+	</field>
+	<field name="ITEM_PART" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEM_PART"/>
+	</field>
+	<field name="ITEM_DESC1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEM_DESC1"/>
+	</field>
+	<field name="ITEM_UM" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEM_UM"/>
+	</field>
+	<field name="QTY_AVAIL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="QTY_AVAIL"/>
+	</field>
+	<field name="QTY_PO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="QTY_PO"/>
+	</field>
+	<field name="QTY_REQ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="QTY_REQ"/>
+	</field>
+	<field name="QTY_BU" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="QTY_BU"/>
+	</field>
+	<field name="P_ITEM_NM" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="P_ITEM_NM"/>
+	</field>
+	<field name="ITEM_PART_TYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEM_PART_TYPE"/>
+	</field>
+	<field name="ITEM_PM_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEM_PM_CODE"/>
+	</field>
+	<field name="ITEM_USR_CHR12" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEM_USR_CHR12"/>
+	</field>
+	<group name="LEV">
+		<groupExpression><![CDATA[$F{LEV}]]></groupExpression>
+	</group>
+	<group name="RM">
+		<groupExpression><![CDATA[$F{RM}]]></groupExpression>
+	</group>
+	<group name="ITEM_PART">
+		<groupExpression><![CDATA[$F{ITEM_PART}]]></groupExpression>
+	</group>
+	<group name="ITEM_DESC1">
+		<groupExpression><![CDATA[$F{ITEM_DESC1}]]></groupExpression>
+	</group>
+	<group name="ITEM_UM">
+		<groupExpression><![CDATA[$F{ITEM_UM}]]></groupExpression>
+	</group>
+	<group name="QTY_AVAIL">
+		<groupExpression><![CDATA[$F{QTY_AVAIL}]]></groupExpression>
+	</group>
+	<group name="QTY_PO">
+		<groupExpression><![CDATA[$F{QTY_PO}]]></groupExpression>
+	</group>
+	<group name="QTY_REQ">
+		<groupExpression><![CDATA[$F{QTY_REQ}]]></groupExpression>
+	</group>
+	<group name="QTY_BU">
+		<groupExpression><![CDATA[$F{QTY_BU}]]></groupExpression>
+	</group>
+	<group name="P_ITEM_NM">
+		<groupExpression><![CDATA[$F{P_ITEM_NM}]]></groupExpression>
+	</group>
+	<group name="ITEM_PART_TYPE">
+		<groupExpression><![CDATA[$F{ITEM_PART_TYPE}]]></groupExpression>
+	</group>
+	<group name="ITEM_PM_CODE">
+		<groupExpression><![CDATA[$F{ITEM_PM_CODE}]]></groupExpression>
+	</group>
+	<group name="ITEM_USR_CHR12">
+		<groupExpression><![CDATA[$F{ITEM_USR_CHR12}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="86" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="40" uuid="2ae0fbcf-a162-4805-b110-6c0d7bbacf87"/>
+				<box leftPadding="140"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="26"/>
+				</textElement>
+				<text><![CDATA[자재 명세서(재고현황)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="70" height="23" uuid="fd13b660-ceb1-4dea-8aef-fd29bc82cf96"/>
+				<box topPadding="2"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="14"/>
+				</textElement>
+				<text><![CDATA[품목코드 :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="63" width="70" height="23" uuid="f61ea2b8-ac8a-4cf6-b123-7fc1f022ed78"/>
+				<box topPadding="2"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="14"/>
+				</textElement>
+				<text><![CDATA[품목명칭 :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="40" width="485" height="23" uuid="43411e28-35db-4e71-8365-dd670e21892b"/>
+				<box topPadding="2"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pscmItem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="63" width="485" height="23" uuid="6eb74309-cf8d-4d8f-9328-04f950b275d4"/>
+				<box topPadding="2"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{P_ITEM_NM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="20" uuid="99ef9049-51d4-47e2-9bc8-8919784e4e38">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="14d0758b-c265-49b8-956f-63aadb29f2d6"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[LEVEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="80" height="20" uuid="9670d02a-7aa3-4aa5-b032-20ac4fc22158">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="998d24cd-05d6-4394-8ce2-66a5bf6911e5"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="20">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[품목번호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="187" height="20" uuid="1d7b9fd5-16b4-4321-a2a9-2843a559c1a5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cfeb3f25-6c98-4314-9dd7-eb62f8b00591"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="70">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[품목명칭]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="0" width="40" height="20" uuid="a09a6896-d0ff-43b1-a9d2-e3fe0b658ca4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4a8157a4-8cf7-4473-900e-c9291c1ce82d"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="12">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[UM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="0" width="60" height="20" uuid="be37ad6c-127d-454a-ade1-cdc1b9d5fab6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="58483c3c-6efd-4260-9ea3-3012a418a942"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[가용재고]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="0" width="60" height="20" uuid="58f0b382-8631-4528-a3b0-22e19a26cea6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="abd94592-2c16-46df-871b-110ee08c8996"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[입고예정]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="467" y="0" width="44" height="20" uuid="961cc7e1-c93b-497d-8769-793229c48b2b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4addc8ce-67ea-4d3f-b7ac-52abb4c9c951"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="6">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[소요량]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="511" y="0" width="44" height="20" uuid="e56d1585-858a-403b-bf00-bdce394730a4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="35d55e85-012d-4d98-9e8f-d9ff9313c122"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="6">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<text><![CDATA[부족분]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="40" height="20" uuid="fccd496c-ac63-40f1-b17d-216b07abe851">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="14d0758b-c265-49b8-956f-63aadb29f2d6"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="4">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LEV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="0" width="80" height="20" uuid="c8bc8997-2cb0-4c7f-ab02-fd23da2e43bc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="998d24cd-05d6-4394-8ce2-66a5bf6911e5"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="4">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEM_PART}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="187" height="20" uuid="beb0847e-5462-40f5-baf7-3c0600181e0b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cfeb3f25-6c98-4314-9dd7-eb62f8b00591"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEM_DESC1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="0" width="40" height="20" uuid="5d013500-e7d1-4681-bd00-63a346badb4d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4a8157a4-8cf7-4473-900e-c9291c1ce82d"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="12">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEM_UM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="347" y="0" width="60" height="20" uuid="7d37f313-cb61-4cf8-9e16-7a9238e236fb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="58483c3c-6efd-4260-9ea3-3012a418a942"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTY_AVAIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="407" y="0" width="60" height="20" uuid="b86a4faa-9185-4c4e-88fa-d6635609538c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="abd94592-2c16-46df-871b-110ee08c8996"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTY_PO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="467" y="0" width="44" height="20" uuid="4192d9d7-7ae7-4c58-9e17-888ff2564ac7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4addc8ce-67ea-4d3f-b7ac-52abb4c9c951"/>
+				</reportElement>
+				<box topPadding="3" leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="맑은 고딕."/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTY_REQ}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement positionType="Float" x="511" y="0" width="44" height="20" uuid="fefc50f7-3006-4667-b916-615961d8a4b5"/>
+				<textField>
+					<reportElement x="0" y="0" width="44" height="20" uuid="3ff2ab5e-030d-461c-9906-bac83e43414b">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="35d55e85-012d-4d98-9e8f-d9ff9313c122"/>
+					</reportElement>
+					<box topPadding="3" leftPadding="0" rightPadding="5">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font fontName="맑은 고딕." size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{QTY_BU}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="277" y="0" width="53" height="30" uuid="2958379f-f0cf-42dc-a14d-d3856abac797"/>
+				<box topPadding="6"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

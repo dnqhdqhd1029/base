@@ -1,0 +1,19 @@
+Libraries License:
+	
+	# jquery (http://www.jquery.com/)
+	  License: MIT (https://jquery.org/license/)
+	  
+	# jquery.ui.touch-punch.min.js (http://touchpunch.furf.com/)
+	  License: Dual licensed under the MIT or GPL Version 2 licenses.
+
+	# underscore.js (http://underscorejs.org/)
+	  License: Underscore may be freely distributed under the MIT license.
+
+	# raphael.js - Javascript SVG to VML ver2.1.2 (http://raphaeljs.com/)
+	  License: MIT (http://raphaeljs.com/license.html)
+	  		   Licensed under the Apache License, Version 2.0 (the "License");
+	  https://github.com/DmitryBaranovskiy/raphael/
+
+	# raphael.export.js - Raphael.Export(https://github.com/ElbertF/Raphael.Export)
+	  License: Licensed under the MIT license
+

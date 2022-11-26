@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BARCODE_A" pageWidth="325" pageHeight="143" columnWidth="325" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f006fbcd-d57c-4893-b8bf-51b15fbd3f1e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SW"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
+	<parameter name="site" class="java.lang.String"/>
+	<parameter name="transNo" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT A.*
+  FROM (
+SELECT CASE WHEN NM.NAME_PRINTFC='Y' THEN NM.NAME_DESC ELSE ' ' END AS NAME,
+       LA.DML_LABEL_NO,
+       LA.DML_QTY_LBLS,
+       NAME_DISNAME0 AS DESC_00,  
+       ISNULL(IM.ITEM_USR_CHR02, '-') AS VAR_00,  
+       NAME_DISNAME1 AS DESC_01,  
+       ISNULL(IM.ITEM_USR_CHR03, '-') AS VAR_01,  
+       NAME_DISNAME2 AS DESC_02,  
+       ISNULL(IM.ITEM_USR_CHR06, ' ') AS VAR_02,
+       NAME_DISNAME3 AS DESC_03,  
+       ISNULL(IM.ITEM_USR_CHR05, '0') AS VAR_03,
+       NAME_DISNAME4 AS DESC_04,  
+       ISNULL(IM.ITEM_USR_CHR09,'0') AS VAR_04, 
+       NAME_DISNAME5 AS DESC_05,  
+       ISNULL(IM.ITEM_USR_CHR04, '-') AS VAR_05, 
+       NAME_DISNAME6 AS DESC_06,  
+       ISNULL(IM.ITEM_USR_CHR08,' ') AS VAR_06, 
+       NAME_DISNAME7 AS DESC_07,  
+       FORMAT(GETDATE(), 'yyyy-MM-dd') AS VAR_07
+  FROM (SELECT * FROM DT_MAT_LABEL WHERE DML_SITE_CD = $P{site}  ) LA JOIN 
+	(SELECT DML_TRANS_NO, DML_TRANS_SEQ
+                FROM DT_MAT_LABEL
+              WHERE DML_SITE_CD = $P{site} 
+                AND $P{transNo} LIKE '%' || DML_TRANS_NO || '%' 
+       )LB ON(LA.DML_TRANS_NO = LB.DML_TRANS_NO AND LA.DML_TRANS_SEQ = LB.DML_TRANS_SEQ)
+  JOIN V_ITEM_MT IM ON(SUBSTRING(LA.DML_LABEL_NO,0,CHARINDEX('^',LA.DML_LABEL_NO)) = IM.ITEM_PART)
+  JOIN NAME_PLATE_MT NM ON (ISNULL(IM.ITEM_USR_CHR01, 'A1') = NAME_CODE AND NAME_CODE = 'A1') 
+  ) A, 
+  (
+    SELECT *
+      FROM DT_MAT_LABEL_CNT
+  )B
+  WHERE B.CNT BETWEEN 1 AND A.DML_QTY_LBLS
+  ORDER BY A.DML_LABEL_NO]]>
+	</queryString>
+	<field name="NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NAME"/>
+	</field>
+	<field name="DML_LABEL_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DML_LABEL_NO"/>
+	</field>
+	<field name="DML_QTY_LBLS" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="DML_QTY_LBLS"/>
+	</field>
+	<field name="DESC_00" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESC_00"/>
+	</field>
+	<field name="VAR_00" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VAR_00"/>
+	</field>
+	<field name="DESC_01" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESC_01"/>
+	</field>
+	<field name="VAR_01" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VAR_01"/>
+	</field>
+	<field name="DESC_02" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESC_02"/>
+	</field>
+	<field name="VAR_02" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VAR_02"/>
+	</field>
+	<field name="DESC_03" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESC_03"/>
+	</field>
+	<field name="VAR_03" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VAR_03"/>
+	</field>
+	<field name="DESC_04" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESC_04"/>
+	</field>
+	<field name="VAR_04" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VAR_04"/>
+	</field>
+	<field name="DESC_05" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESC_05"/>
+	</field>
+	<field name="VAR_05" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VAR_05"/>
+	</field>
+	<field name="DESC_06" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESC_06"/>
+	</field>
+	<field name="VAR_06" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VAR_06"/>
+	</field>
+	<field name="DESC_07" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESC_07"/>
+	</field>
+	<field name="VAR_07" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VAR_07"/>
+	</field>
+	<group name="NAME">
+		<groupExpression><![CDATA[$F{NAME}]]></groupExpression>
+	</group>
+	<group name="DML_LABEL_NO">
+		<groupExpression><![CDATA[$F{DML_LABEL_NO}]]></groupExpression>
+	</group>
+	<group name="DML_QTY_LBLS">
+		<groupExpression><![CDATA[$F{DML_QTY_LBLS}]]></groupExpression>
+	</group>
+	<group name="DESC_00">
+		<groupExpression><![CDATA[$F{DESC_00}]]></groupExpression>
+	</group>
+	<group name="VAR_00">
+		<groupExpression><![CDATA[$F{VAR_00}]]></groupExpression>
+	</group>
+	<group name="DESC_01">
+		<groupExpression><![CDATA[$F{DESC_01}]]></groupExpression>
+	</group>
+	<group name="VAR_01">
+		<groupExpression><![CDATA[$F{VAR_01}]]></groupExpression>
+	</group>
+	<group name="DESC_02">
+		<groupExpression><![CDATA[$F{DESC_02}]]></groupExpression>
+	</group>
+	<group name="VAR_02">
+		<groupExpression><![CDATA[$F{VAR_02}]]></groupExpression>
+	</group>
+	<group name="DESC_03">
+		<groupExpression><![CDATA[$F{DESC_03}]]></groupExpression>
+	</group>
+	<group name="VAR_03">
+		<groupExpression><![CDATA[$F{VAR_03}]]></groupExpression>
+	</group>
+	<group name="DESC_04">
+		<groupExpression><![CDATA[$F{DESC_04}]]></groupExpression>
+	</group>
+	<group name="VAR_04">
+		<groupExpression><![CDATA[$F{VAR_04}]]></groupExpression>
+	</group>
+	<group name="DESC_05">
+		<groupExpression><![CDATA[$F{DESC_05}]]></groupExpression>
+	</group>
+	<group name="VAR_05">
+		<groupExpression><![CDATA[$F{VAR_05}]]></groupExpression>
+	</group>
+	<group name="DESC_06">
+		<groupExpression><![CDATA[$F{DESC_06}]]></groupExpression>
+	</group>
+	<group name="VAR_06">
+		<groupExpression><![CDATA[$F{VAR_06}]]></groupExpression>
+	</group>
+	<group name="DESC_07">
+		<groupExpression><![CDATA[$F{DESC_07}]]></groupExpression>
+	</group>
+	<group name="VAR_07">
+		<groupExpression><![CDATA[$F{VAR_07}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="96" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="10" width="100" height="17" uuid="d4bfd288-1b5b-476d-b6c1-323025c4ae5f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="맑은 고딕." size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VAR_00}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="121" y="10" width="60" height="17" uuid="c04788f4-dc70-4543-988a-87ee98821a21">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="맑은 고딕." size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VAR_01}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="27" width="100" height="17" uuid="f351316e-83bc-424a-8ded-30abad631524">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="맑은 고딕." size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VAR_02}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="120" y="27" width="61" height="17" uuid="970863b7-dc2d-456f-b208-7c1b20dac51e"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VAR_03}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="121" y="44" width="60" height="16" uuid="d9406774-d74c-4994-a88b-3213d8c78844"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VAR_05}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="44" width="100" height="16" uuid="21397c41-5f89-45c7-9747-b6fc352902c3"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VAR_04}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="60" width="100" height="17" uuid="bd95cb03-fd95-4b98-80ff-9af214248f8a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="맑은 고딕." size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VAR_06}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="120" y="60" width="61" height="17" uuid="d368d144-d94b-4e97-979b-e5080a657ee8"/>
+				<textElement>
+					<font fontName="맑은 고딕." size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VAR_07}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="190" y="10" width="70" height="70" uuid="9465ca24-b091-4426-9343-ea47c243be9f"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
+					    new com.google.zxing.qrcode.QRCodeWriter().encode($F{DML_LABEL_NO}, 
+					        com.google.zxing.BarcodeFormat.QR_CODE, 500, 500))]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

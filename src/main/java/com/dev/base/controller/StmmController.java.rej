@@ -1,0 +1,80 @@
+diff a/base/base/src/main/java/com/dev/base/controller/StmmController.java b/base/base/src/main/java/com/dev/base/controller/StmmController.java	(rejected hunks)
+@@ -26,39 +26,60 @@
+ 		return mv;
+ 	}
+ 
++	@GetMapping(value = "/getSystemCode")
++	public Object getSystemCode(@RequestParam Map<String, Object> map) {
++		System.out.println(map);
++		return rest.service("util-service/getSystemCode", map);
++	}
++	/*
++	 * 마스터테이블 컨트롤러
++	 */
++
+ 	@GetMapping(value = "/list")
+ 	public Object stmmList(@RequestParam Map<String, Object> map) {
+ 		return rest.service("util-service/stmm/list", map);
+ 	}
+ 
+-	@PostMapping(value = "/regist", produces = "application/text; charset=utf8")
+-	public String stmtMtRegist(@RequestBody Map<String, Object> map) {
+-		String msg;
+-		try {
+-			rest.service("util-service/stmm/regist", map);
+-			msg = "등록에 성공하였습니다.";
+-			return msg;
+-		} catch (Exception e) {
+-			msg = e.getMessage();
+-			return msg;
+-		}
++	@PostMapping(value = "/regist")
++	public Object stmtMtRegist(@RequestBody Map<String, Object> map) {
++		return rest.service("util-service/stmm/regist", map);
+ 	}
+ 
+ 	@PostMapping(value = "/update")
+-	public String stmtMtUpdate(@RequestBody Map<String, Object> map) {
+-		rest.service("util-service/stmm/update", map);
+-		return "변경에 성공하였습니다.";
++	public Object stmtMtUpdate(@RequestBody Map<String, Object> map) {
++		return rest.service("util-service/stmm/update", map);
++
++	}
++
++	@PostMapping(value = "/delete")
++	public Object stmtMtDelete(@RequestBody Map<String, Object> map) {
++		return rest.service("util-service/stmm/delete", map);
++
+ 	}
+ 
++	/*
++	 * 상세테이블 컨트롤러
++	 */
++
+ 	@GetMapping(value = "/detail/list")
+ 	public Object stmmDetailList(@RequestParam Map<String, Object> map) {
+ 		return rest.service("util-service/stmm/detail/list", map);
+ 	}
+ 
+-	@GetMapping(value = "/getSystemCode")
+-	public Object getSystemCode(@RequestParam Map<String, Object> map) {
+-		System.out.println(map);
+-		return rest.service("util-service/getSystemCode", map);
++	@PostMapping(value = "/detail/regist")
++	public Object stmtDtRegist(@RequestBody Map<String, Object> map) {
++		return rest.service("util-service/stmm/detail/regist", map);
++	}
++
++	@PostMapping(value = "/detail/update")
++	public Object stmtDtUpdate(@RequestBody Map<String, Object> map) {
++		return rest.service("util-service/stmm/detail/update", map);
++
++	}
++
++	@PostMapping(value = "/detail/delete")
++	public Object stmtMtDetailDelete(@RequestBody Map<String, Object> map) {
++		return rest.service("util-service/stmm/detail/delete", map);
+ 	}
+ 
+ }
