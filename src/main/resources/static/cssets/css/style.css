@@ -204,6 +204,11 @@ body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav)
   margin-left: 274px;
 }
 
+
+/*.container-fluid*/
+.container-fluid{
+	
+}
 /*content-wrapper*/
 .content-wrapper {
   /* margin-left: 274px !important; 
@@ -242,10 +247,11 @@ body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav)
   color: #999;
   height:35px;
   border-radius:5px;
+  margin-bottom:5px;
   
 }
 .tab-search ul.nav-tabs li  a:hover{
-	backgorund:none;
+	background:none;
 	border:1px solid #fff;
 	color:#fff;
 }
@@ -348,10 +354,11 @@ body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav)
   outline: none;
 }
 
-.search-btn{
+.search-btn,#searchBtnSet{
 	text-align:right;
 	margin-top:20px;
 }
+.search-btn button,
 .search-btn button.btn {
   width: 83px;
   height: 30px;
@@ -362,20 +369,21 @@ body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav)
   justify-content: center;
   align-items: center;
   font-size: 14px;
+  margin-left:10px;
 }
 
-.search-btn button.btn .ic-search {
+.search-btn button .ic-search {
   width: 20px;
   height: 20px;
   background: url(../images/ic-search.png) center center no-repeat;
 }
-.search-btn button.btn .ic-exle {
+.search-btn button .ic-exle {
   width: 20px;
   height: 20px;
   margin-right: 5px;
   background: url(../images/ic-exle.png) center center no-repeat;
 }
-.search-btn button.btn .ic-reset {
+.search-btn button .ic-reset {
   width: 20px;
   height: 20px;
   background: url(../images/ic-reset.png) center center no-repeat;
@@ -417,28 +425,41 @@ h2.title {
 	background:#fff;
 	margin-top:20px;
 	margin-bottom:20px;
+	overflow: hidden;
+	height:100vh;
 }
 
 
 /*tabel*/
-.table.dataTable {
+.CI-GRID-WRAPPER{
+	border:1px solid #ccc;
+}
+table.CI-GRID-HEADER-TABLE {
   border-collapse: collapse !important;
   width: 100%;
 }
 
-.table thead {
-  background-color: #75aaea;
+table.CI-GRID-HEADER-TABLE thead,
+.CI-GRID-HEADER-SCROLLER {
+  background-color: #75aaea !important;
   color: #fff;
   text-align: center;
   font-size: 12px;
 }
-.table.dataTable thead th {
+.CI-GRID-RECT-RIGHT-TOP{
+	background-color: #75aaea !important;
+	border-left:1px solid #75aaea;
+}
+table.CI-GRID-HEADER-TABLE thead th,
+table.CI-GRID-HEADER-TABLE thead td {
+  text-align:center;
+  border-right:1px solid #fff;
+  border-bottom:1px solid #fff;
+}
+table.CI-GRID-HEADER-TABLE thead th {
   text-align: center;
 }
-.table thead th {
-  text-align: center;
-}
-.table tbody td {
+table.CI-GRID-HEADER-TABLE tbody td {
   text-align: center;
   font-size: 12px;
 }

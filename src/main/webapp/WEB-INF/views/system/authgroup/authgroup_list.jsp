@@ -150,8 +150,8 @@ $(document).on("click", "#btnDetailSave", function(){
 </head>
 <body>
 	<div class="container-fluid h100">
-		<div class="row h100">
-			<div class="col-sm-7 h100">
+		<div class="h100" id="gridWrapper">
+			<div class="h100">
 				<h5>
 					<i class="fas fa-users"></i>
 					권한그룹 목록

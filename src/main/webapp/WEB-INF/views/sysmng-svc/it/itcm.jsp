@@ -28,90 +28,29 @@ input[type="checkbox"]:checked {
 <body>
 	<div class="container-fluid">
 		<form id="sFrm">
-		<!-- <dl
-				class="dl-layout four"
-				id="searchSet"
-				style="margin-bottom: 10px;">
-				<dt>제품군1</dt>
-				<dd>
-					<select
-						class="form-control input-sm"
-						id="SygdGroupCode"
-						name="SygdGroupCode"></select>
-				</dd>
-				<dt>대분류</dt>
-				<dd>
-					<select
-						class="form-control input-sm"
-						id="selectGr2Code"
-						name="selectGr2Code"></select>
-				</dd>
-				<dt>중분류</dt>
-				<dd>
-					<select
-						class="form-control input-sm"
-						id="selectGr3Code"
-						name="selectGr3Code"></select>
-				</dd>
-				<dt>소분류</dt>
-				<dd>
-					<select
-						class="form-control input-sm"
-						id="selectGr4Code"
-						name="selectGr4Code"></select>
-				</dd>
-			</dl>
-			<div
-				id="searchBtnSet"
-				class="text-right">
-				<button
-					type="button"
-					onclick="search();"
-					class="btn btn-sm btn-primary">조회</button>
-				<button
-					type="button"
-					id="btnExcel"
-					class="btn btn-sm btn-success"
-					onclick="excelDown();">Excel Download</button>
-				<button
-					type="button"
-					class="btn btn-sm btn-default"
-					onclick="init();">초기화</button>
-			</div> -->
+		
 		
 		 <div class="content-search " id="searchSet">
 	        <div class="row">
 	        	 <div class="col">
-	        			 <select
-						class="form-control input-sm"
-						id="SygdGroupCode"
-						name="SygdGroupCode"></select>
+	        			 <select class="form-control input-sm" id="SygdGroupCode" name="SygdGroupCode"></select>
 	        	</div>
 	        	<div class="col">
-	        			<select
-						class="form-control input-sm"
-						id="selectGr2Code"
-						name="selectGr2Code"></select>
+	        			<select class="form-control input-sm" id="selectGr2Code" name="selectGr2Code"></select>
 	        	</div>
 	        	<div class="col">
-	        			 <select
-						class="form-control input-sm"
-						id="selectGr3Code"
-						name="selectGr3Code"></select>
+	        			 <select class="form-control input-sm" id="selectGr3Code" name="selectGr3Code"></select>
 	        	</div>
 	        	<div class="col">
-	        			 <select
-						class="form-control input-sm"
-						id="selectGr4Code"
-						name="selectGr4Code"></select>
+	        			 <select class="form-control input-sm" id="selectGr4Code" name="selectGr4Code"></select>
 	        	</div>
 	        </div>
 	        
 	        
         	 <div class="search-btn" id="searchBtnSet">
-	              <button class="btn mr10"><i class="ic-search"></i>조회</button>
-	              <button class="btn mr10"><i class="ic-exle"></i>엑셀</button>
-	              <button class="btn"><i class="ic-reset"></i>초기화</button>
+	              <button type="button" onclick="search();" ><i class="ic-search"></i>조회</button>
+	              <button type="button" id="btnExcel" onclick="excelDown();"><i class="ic-exle"></i>엑셀</button>
+	              <button type="button" onclick="init();"><i class="ic-reset"></i>초기화</button>
             </div>
         
         </div>
@@ -122,7 +61,6 @@ input[type="checkbox"]:checked {
 			<div id="sub_title">
 				
 				<h2 class="title">품목분류 설정내역 &nbsp;</h2>
-			
 				
 				<select id="row_cnt">
 					<option value="10">10건씩 보기</option>

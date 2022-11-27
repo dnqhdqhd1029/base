@@ -15,7 +15,48 @@
 <body>
 	<div class="container-fluid">
 		<form id="sFrm">
-			<dl class="dl-layout four" id="searchSet"
+		 <div class="content-search " id="searchSet">
+	        <div class="row">
+				<div class="col">
+					<input Type="text" class="form-control input-sm" id="Code"
+						Name="Code" maxlength="40" autofocus="autofocus" placeholder="시스템코드"
+					>
+				</div>
+				<div class="col">
+					<input Type="text" class="form-control input-sm" id="Code_Name"
+						Name="Code_Name" maxlength="40"  placeholder="코드명"
+					>
+				</div>
+				<div class="col">
+					<select class="form-control input-sm" id="Code_Type"
+						name="Code_Type"
+					></select>
+				</div>
+				<div class="col">
+					<select class="form-control input-sm" id="IsUse" Name="IsUse">
+						<option value="">선택</option>
+						<option value="Y">Y</option>
+						<option value="N">N</option>
+					</select>
+				</div>
+	       </div>
+	       <div id="searchBtnSet" class="text-right">
+	       <!-- 
+				<button Type="submit" class="btn btn-sm btn-primary">조회</button>
+				<button type="button" id="btnExcel" class="btn btn-sm btn-success"
+					onclick="excelDown();"
+				>Excel Download</button>
+				<button type="reset" id="btn_init" class="btn btn-sm btn-default">초기화</button> -->
+				
+				 <div class="search-btn" id="searchBtnSet">
+	              <button type="submit" class="btn mr10"><i class="ic-search"></i>조회</button>
+	              <button type="button" id="btnExcel" class="btn mr10"><i class="ic-exle" onclick="excelDown();"></i>엑셀</button>
+	              <button type="reset" id="btn_init" class="btn"><i class="ic-reset"></i>초기화</button>
+            </div>
+			</div>
+		 </div>
+
+			<!-- <dl class="dl-layout four" id="searchSet"
 				style="margin-bottom: 10px;"
 			>
 				<dt>
@@ -59,9 +100,9 @@
 					onclick="excelDown();"
 				>Excel Download</button>
 				<button type="reset" id="btn_init" class="btn btn-sm btn-default">초기화</button>
-			</div>
+			</div>-->
 		</form>
-		<div class="row">
+		<div class="" id="gridWrapper">
 
 			<div class="col-sm-6">
 				<p id="sub_title">
